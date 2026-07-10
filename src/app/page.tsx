@@ -1,65 +1,168 @@
-import Image from "next/image";
+// 💡 [React 19 / Next.js] Diretiva 'use client' informa ao React que este componente 
+// precisa de interatividade (hooks como useRef, useEffect, framer-motion) e deve ser renderizado no cliente.
+"use client";
+
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { AnimatedHeroContent } from "@/components/AnimatedHeroContent";
+import { HeroImages } from "@/components/HeroImages";
+import { BenefitsSection } from "@/components/BenefitsSection";
+import { FluidBlob } from "@/components/FluidBlob";
+
+import { CollectionsSection } from "@/components/CollectionsSection";
+import { AboutSection } from "@/components/AboutSection";
+import { TestimonialSection } from "@/components/TestimonialSection";
+import { GreenCtaSection } from "@/components/GreenCtaSection";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { FaqSection } from "@/components/FaqSection";
+import { StarIcon } from "@/components/ui/Icons";
+import { staggerContainer, fadeUp } from "@/lib/animations";
+import { IN_VIEW_OPTIONS } from "@/lib/animations";
+import { TEXTS } from "@/lib/content";
+
+function Stars() {
+  return (
+    <div className="flex gap-0.5" aria-hidden="true">
+      {/* 💡 [React] Array.from() cria um array iterável. 
+          O uso da prop 'key' no React é essencial na renderização de listas 
+          para que o React consiga rastrear a identidade de cada item e não refazer todo o DOM. */}
+      {Array.from({ length: 5 }).map((_, i) => (
+        <StarIcon key={i} className="w-4 h-4 fill-primary text-primary" />
+      ))}
+    </div>
+  );
+}
+
+
+
+function TrustBar() {
+  // 💡 [React] useRef cria uma referência mutável que não causa re-render.
+  // 💡 [Framer Motion / Hooks] hooks só funcionam em Client Components.
+  const ref = useRef(null);
+  const inView = useInView(ref, IN_VIEW_OPTIONS);
+
+  return (
+    <section
+      ref={ref}
+      aria-label="Indicadores de confiança"
+      className="relative z-40 mx-auto w-full max-w-7xl border-t border-border/40 px-6 py-10 lg:px-12"
+    >
+      <motion.div
+        variants={staggerContainer(0.1)}
+        initial="hidden"
+        animate={inView ? "show" : "hidden"}
+        className="grid grid-cols-1 gap-12 sm:grid-cols-3 sm:gap-8"
+      >
+        {/* Clientes */}
+        <motion.div variants={fadeUp} className="sm:border-r border-border/40 sm:pr-10 flex flex-col items-center sm:items-start text-center sm:text-left">
+          <motion.span 
+            initial={{ scale: 0.5, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ type: "spring", damping: 12, delay: 0.1 }}
+            className="font-heading text-4xl font-medium text-foreground block mb-2"
+          >
+            {TEXTS.TRUST.clients.highlight}
+          </motion.span>
+          <p className="font-sans text-xs text-muted-foreground leading-relaxed">{TEXTS.TRUST.clients.text}</p>
+        </motion.div>
+
+        {/* Vendas */}
+        <motion.div variants={fadeUp} className="sm:border-r border-border/40 sm:px-10 flex flex-col items-center sm:items-start text-center sm:text-left">
+          <motion.span 
+            initial={{ scale: 0.5, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ type: "spring", damping: 12, delay: 0.2 }}
+            className="font-heading text-4xl font-medium text-foreground block mb-2"
+          >
+            {TEXTS.TRUST.sales.value}
+          </motion.span>
+          <p className="font-sans text-xs text-muted-foreground leading-relaxed">{TEXTS.TRUST.sales.label}</p>
+        </motion.div>
+
+        {/* Rating */}
+        <motion.div variants={fadeUp} className="sm:pl-10 flex flex-col items-center sm:items-start text-center sm:text-left">
+          <motion.span 
+            initial={{ scale: 0.5, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ type: "spring", damping: 12, delay: 0.3 }}
+            className="font-heading text-4xl font-medium text-foreground block mb-2"
+          >
+            {TEXTS.TRUST.rating.value}
+          </motion.span>
+          <p className="font-sans text-xs text-muted-foreground leading-relaxed">{TEXTS.TRUST.rating.label}</p>
+        </motion.div>
+      </motion.div>
+    </section>
+  );
+}
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[200] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded"
+      >
+        Pular para o conteúdo principal
+      </a>
+
+      <Header />
+
+      {/* Noise overlay */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-50 opacity-[0.022] mix-blend-overlay bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.75%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E')]"
+      />
+
+      <main id="main-content" className="relative flex min-h-screen flex-col bg-background overflow-x-hidden">
+
+        {/* ── TEXTS.HERO ── */}
+        <section
+          aria-label="Herboria — Saboaria Botânica"
+          className="relative z-30 pt-16 md:pt-28 pb-16 lg:pt-32 lg:pb-16"
+        >
+          <FluidBlob
+            side="hero"
+            id="hero-blob"
+            className="top-0 -right-[15%] w-[90vw] h-[90vw] md:-right-[15%] md:w-[50vw] md:h-[135%] max-w-[1000px] translate-x-4 md:translate-x-8"
+            colorStart="#F0E4C8"
+            colorEnd="#EDD5AC"
+            opacity={0.45}
+          />
+          <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 lg:grid-cols-2 lg:gap-16 lg:px-12 items-center min-h-[50vh] lg:min-h-[480px]">
+            <AnimatedHeroContent />
+            <HeroImages />
+          </div>
+        </section>
+
+        {/* ── TEXTS.TRUST BAR ── */}
+        <TrustBar />
+
+        {/* ── TEXTS.BENEFITS ── */}
+        <BenefitsSection />
+
+        {/* ── COLLECTIONS ── */}
+        <CollectionsSection />
+
+        {/* ── ABOUT TEXTS.ARTISAN ── */}
+        <AboutSection />
+
+        {/* ── GREEN CTA ── */}
+        <GreenCtaSection />
+
+        {/* ── TEXTS.TESTIMONIALS ── */}
+        <TestimonialSection />
+
+        {/* ── TEXTS.FAQ ── */}
+        <FaqSection />
+
       </main>
-    </div>
+
+      <Footer />
+    </>
   );
 }
