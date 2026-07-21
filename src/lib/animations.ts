@@ -62,4 +62,4 @@ export const cardFlip: Variants = {
 };
 
 /** Configuração useInView padrão */
-export const IN_VIEW_OPTIONS = { once: true, margin: "-200px" } as const;
+export const IN_VIEW_OPTIONS = { once: true, amount: 0.25 } as const;

@@ -6,6 +6,10 @@ import { Providers } from "@/components/Providers";
 import { FacebookPixel } from "@/components/FacebookPixel";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { TEXTS } from "@/lib/content";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import Script from "next/script";
 
 // ─── FONTES — display:swap elimina FOIT, subset otimiza payload ──
 // 💡 [Next.js] next/font elimina o CLS (Cumulative Layout Shift) carregando fontes de forma otimizada.
@@ -31,11 +35,11 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   metadataBase: new URL(TEXTS.SITE.url),
   title: {
-    default:  "Herboria | Saboaria Botânica Artesanal — Sabonetes Naturais Premium",
-    template: "%s | Herboria Saboaria Botânica",
+    default:  "Energia Criativa | Saboaria Botânica Artesanal — Sabonetes Naturais Premium",
+    template: "%s | Energia Criativa Saboaria Botânica",
   },
   description:
-    "Sabonetes artesanais Herboria: 100% naturais, com óleos essenciais puros e glicerina vegetal preservada. Transforme seu banho em aromaterapia. Kits de presente únicos. Produção limitada.",
+    "Sabonetes artesanais Energia Criativa: 100% naturais, com óleos essenciais puros e glicerina vegetal preservada. Transforme seu banho em aromaterapia. Kits de presente únicos. Produção limitada.",
   keywords: [
     "sabonetes artesanais",
     "sabonete natural",
@@ -45,12 +49,12 @@ export const metadata: Metadata = {
     "sabonete cold process",
     "kit presente sabonete",
     "sabonete orgânico",
-    "Herboria",
+    "Energia Criativa",
     "sabonete glicerina",
   ],
-  authors:  [{ name: "Herboria Saboaria Botânica" }],
-  creator:  "Herboria",
-  publisher:"Herboria",
+  authors:  [{ name: "Energia Criativa Saboaria Botânica" }],
+  creator:  "Energia Criativa",
+  publisher:"Energia Criativa",
   robots: {
     index:             true,
     follow:            true,
@@ -60,21 +64,21 @@ export const metadata: Metadata = {
     type:        "website",
     locale:      "pt_BR",
     url:         TEXTS.SITE.url,
-    siteName:    "Herboria Saboaria Botânica",
-    title:       "Herboria | Sabonetes Botânicos Artesanais — 100% Naturais",
-    description: "Transforme seu banho em aromaterapia com sabonetes artesanais Herboria. Óleos essenciais puros, glicerina vegetal preservada. Produção limitada.",
+    siteName:    "Energia Criativa Saboaria Botânica",
+    title:       "Energia Criativa | Sabonetes Botânicos Artesanais — 100% Naturais",
+    description: "Transforme seu banho em aromaterapia com sabonetes artesanais Energia Criativa. Óleos essenciais puros, glicerina vegetal preservada. Produção limitada.",
     images: [
       {
         url:    "/hero-composition.png",
         width:  1200,
         height: 630,
-        alt:    "Herboria — Sabonetes Botânicos Artesanais",
+        alt:    "Energia Criativa — Sabonetes Botânicos Artesanais",
       },
     ],
   },
   twitter: {
     card:        "summary_large_image",
-    title:       "Herboria | Sabonetes Botânicos Artesanais",
+    title:       "Energia Criativa | Sabonetes Botânicos Artesanais",
     description: "Transforme seu banho em aromaterapia. 100% naturais, produção artesanal limitada.",
     images:      ["/hero-composition.png"],
   },
@@ -82,6 +86,9 @@ export const metadata: Metadata = {
     canonical: TEXTS.SITE.url,
   },
   category: "health & beauty",
+  verification: {
+    google: "SEU_CODIGO_DE_VERIFICACAO_GSC",
+  },
 };
 
 // ─── JSON-LD STRUCTURED DATA ─────────────────────────────────────
@@ -91,7 +98,7 @@ const jsonLd = {
     {
       "@type":       "LocalBusiness",
       "@id":         `${TEXTS.SITE.url}/#business`,
-      name:          "Herboria Saboaria Botânica",
+      name:          "Energia Criativa Saboaria Botânica",
       description:   "Saboaria artesanal especializada em sabonetes botânicos com óleos essenciais puros e ingredientes 100% naturais.",
       url:           TEXTS.SITE.url,
       telephone:     `+${TEXTS.SITE.phone}`,
@@ -113,7 +120,7 @@ const jsonLd = {
       "@type":      "WebSite",
       "@id":        `${TEXTS.SITE.url}/#website`,
       url:          TEXTS.SITE.url,
-      name:         "Herboria",
+      name:         "Energia Criativa",
       description:  "Saboaria Botânica Artesanal",
       inLanguage:   "pt-BR",
     },
@@ -127,10 +134,9 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" className="scroll-smooth">
+    <html lang="pt-BR" className="scroll-smooth snap-y snap-proximity">
       <head>
-        {/* Preconnect para imagens externas */}
-        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://connect.facebook.net" crossOrigin="anonymous" />
         {/* JSON-LD */}
         <script
           type="application/ld+json"
@@ -141,6 +147,19 @@ export default function RootLayout({
         <FacebookPixel />
         <Providers>{children}</Providers>
         <FloatingWhatsApp />
+        <GoogleAnalytics gaId="G-ABC123XYZ" />
+        <Analytics />
+        <SpeedInsights />
+        {/* Microsoft Clarity - Analytics de Sessão e Heatmaps */}
+        <Script id="microsoft-clarity" strategy="afterInteractive">
+          {`
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "CLARITY_ID_AQUI");
+          `}
+        </Script>
       </body>
     </html>
   );

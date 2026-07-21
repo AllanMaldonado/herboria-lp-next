@@ -2,13 +2,6 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    // Domínios externos permitidos (avatares dos depoimentos)
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
-    ],
     // Formatos modernos — WebP e AVIF para melhor compressão
     formats: ["image/avif", "image/webp"],
     // Qualidade padrão — 85 é ideal entre qualidade e tamanho

@@ -15,17 +15,22 @@ export function Header() {
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      const heroHeight = window.innerHeight;
       
-      setIsAtTop(currentScrollY < 50);
+      setIsAtTop(currentScrollY < heroHeight);
 
-      if (currentScrollY < 50) {
-        setIsVisible(true);
-      } else if (currentScrollY > lastScrollY) {
-        // Scrolling down
+      if (currentScrollY < heroHeight) {
         setIsVisible(false);
       } else {
-        // Scrolling up
-        setIsVisible(true);
+        const diff = currentScrollY - lastScrollY;
+        if (diff > 15) {
+          // Scrolling down significantly
+          setIsVisible(false);
+        } else if (diff < -15) {
+          // Scrolling up significantly
+          setIsVisible(true);
+        }
+        // If difference is small (bounce), do nothing and keep current state.
       }
 
       lastScrollY = currentScrollY;
@@ -40,9 +45,9 @@ export function Header() {
       initial={{ y: -16, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className={`absolute md:fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
-        isAtTop ? "bg-transparent py-5" : "bg-transparent py-5 md:bg-background/90 md:backdrop-blur-md md:shadow-sm md:py-2"
-      } ${isVisible ? "translate-y-0" : "translate-y-0 md:-translate-y-full"}`}
+      className={`top-0 left-0 right-0 z-50 w-full transition-all duration-300 absolute md:fixed bg-transparent md:bg-background/95 md:backdrop-blur-md md:shadow-sm py-5 md:py-2 ${
+        !isAtTop && isVisible ? "translate-y-0" : "translate-y-0 md:-translate-y-full"
+      }`}
       role="banner"
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0 transition-all duration-300">
@@ -50,12 +55,12 @@ export function Header() {
         <div className="flex-1 flex justify-start">
           <Link href="/" className="flex items-center gap-2.5 group shrink-0" aria-label="Herboria — Página inicial">
             <BotanicalEmblem className="w-9 h-9 text-primary transition-transform duration-300 group-hover:scale-105" />
-            <div className="leading-none text-center md:text-left hidden sm:flex sm:flex-col">
+            <div className="leading-none text-center md:text-left hidden sm:flex sm:flex-col gap-1.5">
+              <span className="font-sans text-[8px] sm:text-[9px] tracking-[0.5em] text-muted-foreground uppercase block ml-1">
+                {TEXTS.SITE.tagline}
+              </span>
               <span className="font-heading text-[17px] font-semibold tracking-[0.18em] text-foreground uppercase block">
                 {TEXTS.SITE.name}
-              </span>
-              <span className="font-sans text-[9px] tracking-[0.22em] text-muted-foreground uppercase block -mt-0.5">
-                {TEXTS.SITE.tagline}
               </span>
             </div>
           </Link>

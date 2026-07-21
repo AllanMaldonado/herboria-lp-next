@@ -1,16 +1,15 @@
-# Herboria Saboaria Botânica
-
-> Sabonetes artesanais 100% naturais com óleos essenciais puros e glicerina vegetal preservada. Transforme seu banho em aromaterapia.
+# Title: Herboria Saboaria Botânica
+> Summary: Sabonetes artesanais 100% naturais com óleos essenciais puros e glicerina vegetal preservada. Transforme seu banho em aromaterapia.
 
 Herboria é uma saboaria artesanal brasileira especializada na produção de sabonetes botânicos pelo método Cold Process. Cada barra é curada por 45 dias, preservando 100% da glicerina vegetal natural e as propriedades terapêuticas dos óleos essenciais.
 
-## Produtos
+## Produtos Disponíveis
 
 - **Kit Serenidade** (R$ 89,90): Lavanda Francesa & Argila Roxa. Para rituais noturnos de relaxamento profundo.
 - **Kit Vitalidade** (R$ 89,90): Capim Limão, Alecrim & Argila Verde. Energizante para o banho da manhã.
 - **Kit Purificação** (R$ 95,90): Carvão Ativado, Melaleuca & Hortelã. Limpeza detox profunda.
 
-## Diferenciais
+## Nossos Diferenciais
 
 - Método Cold Process: produção a frio que preserva nutrientes
 - Glicerina vegetal 100% natural preservada (não removida)
@@ -19,8 +18,8 @@ Herboria é uma saboaria artesanal brasileira especializada na produção de sab
 - Produção limitada em pequenos lotes artesanais
 - Cura mínima de 45 dias por barra
 
-## Contato
+## Contato e Redes Sociais
 
-- WhatsApp: https://wa.me/5511999999999
-- Instagram: https://instagram.com/herboria
-- Site: https://herboria.com.br
+- WhatsApp: [https://wa.me/5511999999999](https://wa.me/5511999999999)
+- Instagram: [https://instagram.com/herboria](https://instagram.com/herboria)
+- Site: [https://herboria.com.br](https://herboria.com.br)

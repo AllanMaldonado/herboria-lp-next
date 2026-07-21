@@ -46,7 +46,7 @@ function TrustBar() {
     <section
       ref={ref}
       aria-label="Indicadores de confiança"
-      className="relative z-40 mx-auto w-full max-w-7xl border-t border-border/40 px-6 py-10 lg:px-12"
+      className="relative z-40 mx-auto w-full max-w-7xl border-t border-b sm:border-b-0 border-border/40 px-6 py-10 lg:py-20 lg:px-12"
     >
       <motion.div
         variants={staggerContainer(0.1)}
@@ -120,27 +120,31 @@ export default function Home() {
 
       <main id="main-content" className="relative flex min-h-screen flex-col bg-background overflow-x-hidden">
 
-        {/* ── TEXTS.HERO ── */}
-        <section
-          aria-label="Herboria — Saboaria Botânica"
-          className="relative z-30 pt-16 md:pt-28 pb-16 lg:pt-32 lg:pb-16"
-        >
-          <FluidBlob
-            side="hero"
-            id="hero-blob"
-            className="top-0 -right-[15%] w-[90vw] h-[90vw] md:-right-[15%] md:w-[50vw] md:h-[135%] max-w-[1000px] translate-x-4 md:translate-x-8"
-            colorStart="#F0E4C8"
-            colorEnd="#EDD5AC"
-            opacity={0.45}
-          />
-          <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 lg:grid-cols-2 lg:gap-16 lg:px-12 items-center min-h-[50vh] lg:min-h-[480px]">
-            <AnimatedHeroContent />
-            <HeroImages />
-          </div>
-        </section>
+        {/* ── TEXTS.HERO & TRUST BAR (Desktop Auto-Center Group) ── */}
+        <div className="lg:min-h-[100dvh] flex flex-col snap-start">
+          <div className="my-auto w-full flex flex-col">
+            <section
+              aria-label="Energia Criativa — Saboaria Botânica"
+              className="relative z-30 pt-28 pb-16 lg:pt-0 lg:pb-0"
+            >
+              <FluidBlob
+                side="hero"
+                id="hero-blob"
+                className="top-0 -right-[40%] w-[120vw] h-[120vw] sm:-right-[15%] sm:w-[90vw] md:-right-[15%] md:w-[50vw] md:h-[135%] max-w-[1000px] translate-x-12 md:translate-x-8"
+                colorStart="#F0E4C8"
+                colorEnd="#EDD5AC"
+                opacity={0.45}
+              />
+              <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-20 lg:grid-cols-2 lg:gap-24 px-6 lg:px-12 items-center min-h-[50vh] lg:min-h-[550px]">
+                <AnimatedHeroContent />
+                <HeroImages />
+              </div>
+            </section>
 
-        {/* ── TEXTS.TRUST BAR ── */}
-        <TrustBar />
+            {/* ── TEXTS.TRUST BAR ── */}
+            <TrustBar />
+          </div>
+        </div>
 
         {/* ── TEXTS.BENEFITS ── */}
         <BenefitsSection />

@@ -6,33 +6,33 @@ import { TEXTS } from "@/lib/content";
 
 export function Footer() {
   return (
-    <footer className="relative bg-primary overflow-hidden py-16 lg:py-24 border-t border-white/10">
+    <footer className="relative bg-primary overflow-hidden py-12 lg:py-16 border-t border-white/10">
       {/* Noise texture */}
       <div className="absolute inset-0 opacity-[0.035] mix-blend-overlay pointer-events-none bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E')]" />
 
       <div className="mx-auto max-w-7xl px-6 lg:px-12 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-8 mb-10">
           {/* Coluna 1: Branding */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <Link href="/" className="inline-flex items-center gap-4 group mb-8" aria-label="Herboria — Voltar ao topo">
               <BotanicalEmblem className="w-16 h-16 sm:w-20 sm:h-20 text-white transition-transform duration-300 group-hover:scale-105" />
-              <div className="leading-none flex flex-col">
-                <span className="font-heading text-2xl sm:text-3xl font-semibold tracking-[0.18em] text-white uppercase block mb-2">
-                  {TEXTS.SITE.name}
-                </span>
-                <span className="font-sans text-[10px] sm:text-xs tracking-[0.25em] text-white/60 uppercase block">
+              <div className="leading-none flex flex-col items-start gap-2">
+                <span className="font-sans text-[10px] sm:text-[11px] tracking-[0.45em] sm:tracking-[0.5em] text-white/60 uppercase block ml-1">
                   {TEXTS.SITE.tagline}
+                </span>
+                <span className="font-heading text-2xl sm:text-3xl font-semibold tracking-[0.18em] text-white uppercase block text-left">
+                  {TEXTS.SITE.name}
                 </span>
               </div>
             </Link>
-            <p className="font-sans text-sm text-white/70 max-w-sm leading-relaxed mb-8">
+            <p className="font-heading italic text-2xl sm:text-[22px] text-white/90 max-w-sm leading-snug mb-8">
               {TEXTS.FOOTER.tagline}
             </p>
           </div>
 
           {/* Coluna 2: Redes Sociais */}
           <div className="flex flex-col items-center md:items-end text-center md:text-right">
-            <p className="font-heading text-sm font-semibold tracking-[0.15em] text-white uppercase mb-6">{TEXTS.FOOTER.socialLabel}</p>
+            <p className="font-sans text-[10px] sm:text-xs tracking-[0.25em] text-white/60 uppercase mb-6">{TEXTS.FOOTER.socialLabel}</p>
             <div className="flex items-center justify-center md:justify-end gap-6">
               <a href={TEXTS.SITE.instagram} target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors duration-200 focus-visible:outline-white" aria-label="Instagram">
                 <InstagramIcon className="w-5 h-5" />
@@ -45,7 +45,7 @@ export function Footer() {
         </div>
 
         {/* CTA Footer */}
-        <div className="hidden md:flex bg-white/5 border border-white/10 rounded-2xl p-8 lg:p-10 flex-col md:flex-row items-center justify-between gap-8 mb-16">
+        <div className="hidden md:flex bg-white/5 border border-white/10 rounded-2xl p-6 lg:p-8 flex-col md:flex-row items-center justify-between gap-8 mb-10">
           <div className="max-w-xl text-center md:text-left">
             <h2 className="font-heading text-2xl lg:text-3xl font-medium text-white mb-3">
               {TEXTS.FOOTER.cta.title} <em className="not-italic text-white/70">{TEXTS.FOOTER.cta.titleAccent}</em>
@@ -69,13 +69,22 @@ export function Footer() {
 
         {/* Linha Inferior: Copyright */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="font-sans text-[11px] text-white/40 tracking-wider text-center md:text-left">
-            {TEXTS.FOOTER.copyright}
+          <p className="font-sans text-[11px] text-white/40 tracking-wider text-center md:text-left leading-relaxed">
+            <span className="block md:inline">© 2026 Ateliê Energia Criativa</span>
+            <span className="hidden md:inline mx-2">✦</span>
+            <span className="block md:inline">Todos os direitos reservados</span>
           </p>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-col sm:flex-row items-center justify-center md:justify-end gap-1.5 sm:gap-4 mt-4 md:mt-0">
              <p className="font-sans text-[11px] text-white/40 tracking-wider">
                {TEXTS.FOOTER.madeIn}
              </p>
+             <span className="text-white/20 hidden sm:block">•</span>
+             <a href="https://allanmaldonado.dev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-white/40 hover:text-white/80 transition-colors" aria-label="Desenvolvido por Allan Maldonado">
+               <span className="font-sans text-[11px] tracking-wider">Desenvolvido por</span>
+               <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10 20L14 4M18 8L22 12L18 16M6 16L2 12L6 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+               </svg>
+             </a>
           </div>
         </div>
       </div>

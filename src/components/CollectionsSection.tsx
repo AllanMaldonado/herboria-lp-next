@@ -8,6 +8,7 @@ import { FluidBlob } from "./FluidBlob";
 import { IN_VIEW_OPTIONS } from "@/lib/animations";
 import { TEXTS } from "@/lib/content";
 import { WhatsAppIcon } from "./ui/Icons";
+import { trackKitBuy, trackKitModalOpen } from "@/lib/tracking";
 
 export function CollectionsSection() {
   const [selected, setSelected] = useState<(typeof TEXTS.KITS.items)[number] | null>(null);
@@ -16,22 +17,28 @@ export function CollectionsSection() {
 
   useEffect(() => {
     if (selected) {
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
+      if (scrollbarWidth > 0) {
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+      }
     } else {
       document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
     }
     return () => {
       document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
     };
   }, [selected]);
 
   return (
     <>
-      <section id="colecoes" ref={ref} className="relative z-10 overflow-visible py-20 lg:py-32 bg-background">
+      <section id="colecoes" ref={ref} className="relative z-10 overflow-visible py-20 lg:py-32 bg-background snap-start">
         <FluidBlob
           side="left"
           id="collections-blob"
-          className="w-[105vw] h-[105vw] md:w-[60vw] md:h-[60vw] max-w-[850px] max-h-[850px] -left-[35%] md:-left-[15%] top-[60%] -translate-y-1/2"
+          className="w-[150vw] h-[150vw] md:w-[60vw] md:h-[60vw] max-w-[850px] max-h-[850px] -left-[80%] md:-left-[15%] top-[15%] md:top-[60%] -translate-y-1/2"
           colorStart="#F0E4C8"
           colorEnd="#EDD5AC"
           opacity={0.45}
@@ -47,7 +54,7 @@ export function CollectionsSection() {
             <motion.span variants={fadeUp} className="font-sans text-[11px] font-semibold tracking-[0.2em] uppercase text-primary mb-2 block">
               {TEXTS.KITS.tag}
             </motion.span>
-            <motion.h2 variants={fadeUp} className="font-heading text-4xl sm:text-5xl font-medium text-foreground tracking-tight mb-4">
+            <motion.h2 variants={fadeUp} className="font-heading text-4xl sm:text-5xl font-medium text-foreground tracking-tight mb-2">
               {TEXTS.KITS.title}
             </motion.h2>
             <motion.p variants={fadeUp} className="font-sans text-sm text-muted-foreground leading-relaxed">
@@ -65,18 +72,22 @@ export function CollectionsSection() {
               <motion.article
                 key={kit.id}
                 variants={fadeUp}
-                className="group relative flex flex-col bg-background rounded-2xl overflow-hidden border border-border/40 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer h-full"
-                onClick={() => setSelected(kit)}
+                className="group relative flex flex-col mx-auto w-full max-w-md lg:max-w-none bg-background rounded-2xl overflow-hidden border border-border/40 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer h-full"
+                onClick={() => {
+                  trackKitModalOpen({ kitName: kit.name, value: kit.price.replace('R$ ', '').replace(',', '.') });
+                  setSelected(kit);
+                }}
               >
                 <div
-                  className="relative aspect-[4/3] w-full overflow-hidden bg-secondary/20 cursor-pointer text-left"
-                  aria-label={`Ver detalhes do ${kit.name}`}
+                  className="relative aspect-video lg:aspect-[4/3] w-full overflow-hidden bg-secondary/20 cursor-pointer text-left"
                 >
                   <Image
-                    src={kit.img}
+                    src={kit.img.src}
                     alt={kit.name}
                     fill
-                    loading="lazy"
+                    priority
+                    placeholder="blur"
+                    blurDataURL={kit.img.blurDataURL}
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
@@ -98,14 +109,21 @@ export function CollectionsSection() {
                         href={kit.whatsapp}
                         target="_blank"
                         rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          trackKitBuy({ kitName: kit.name, value: kit.price.replace('R$ ', '').replace(',', '.') });
+                        }}
                         className="w-full xl:flex-1 inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground font-sans text-[10px] lg:text-[11px] font-semibold tracking-[0.18em] uppercase px-3 py-3 rounded-full transition-all duration-200 hover:bg-primary/90 hover:-translate-y-0.5 active:scale-95 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 text-center whitespace-nowrap"
                       >
                         <WhatsAppIcon className="w-4 h-4 shrink-0" />
                         <span>{TEXTS.KITS.labels.primaryCta}</span>
                       </a>
                       <button
-                        onClick={(e) => { e.stopPropagation(); setSelected(kit); }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          trackKitModalOpen({ kitName: kit.name, value: kit.price.replace('R$ ', '').replace(',', '.') });
+                          setSelected(kit);
+                        }}
                         className="group/btn w-full xl:flex-1 inline-flex items-center justify-center gap-1.5 bg-secondary/60 text-foreground font-sans text-[10px] lg:text-[11px] font-semibold tracking-[0.18em] uppercase px-3 py-3 rounded-full transition-all duration-200 hover:bg-secondary hover:-translate-y-0.5 active:scale-95 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 cursor-pointer text-center whitespace-nowrap"
                       >
                         {TEXTS.KITS.labels.secondaryCta} <span className="transition-transform duration-300 group-hover/btn:translate-x-1 inline-block">→</span>
@@ -122,7 +140,7 @@ export function CollectionsSection() {
       {/* Modal */}
       <AnimatePresence>
         {selected && (
-          <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-6" role="dialog" aria-modal="true" aria-label={selected.name}>
+          <div className="fixed inset-0 z-[110] flex items-end sm:items-center justify-center p-0 sm:p-6" role="dialog" aria-modal="true" aria-label={selected.name}>
             <motion.div
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
               onClick={() => setSelected(null)}
@@ -133,7 +151,7 @@ export function CollectionsSection() {
               initial={{ y: "100%", opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: "100%", opacity: 0 }}
-              transition={{ type: "spring", stiffness: 350, damping: 30, mass: 0.8 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
               drag="y"
               dragConstraints={{ top: 0, bottom: 0 }}
               dragElastic={0.2}
@@ -152,7 +170,7 @@ export function CollectionsSection() {
                 className="absolute top-4 right-4 z-30 w-10 h-10 bg-white shadow-lg text-black rounded-full flex items-center justify-center transition-transform hover:scale-105 text-sm cursor-pointer">✕</button>
 
               <div className="w-full sm:w-1/2 h-64 sm:h-auto relative shrink-0 bg-secondary/10 overflow-hidden">
-                <Image src={selected.img} alt={selected.name} fill className="object-cover sm:object-cover drop-shadow-2xl scale-[1.1] sm:scale-100" sizes="50vw" priority />
+                <Image src={selected.img.src} alt={selected.name} fill placeholder="blur" blurDataURL={selected.img.blurDataURL} className="object-cover sm:object-cover drop-shadow-2xl scale-[1.1] sm:scale-100" sizes="50vw" priority />
               </div>
 
               <div className="w-full sm:w-1/2 p-7 sm:p-12 flex flex-col pb-8 sm:pb-12 justify-center">
@@ -175,10 +193,15 @@ export function CollectionsSection() {
                     <p className="font-heading text-2xl sm:text-4xl font-medium text-foreground">{selected.price}</p>
                   </div>
                   <a href={selected.whatsapp} target="_blank" rel="noopener noreferrer"
+                    onClick={() => trackKitBuy({ kitName: selected.name, value: selected.price.replace('R$ ', '').replace(',', '.') })}
                     className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground font-sans text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase px-6 py-3.5 sm:py-5 rounded-full transition-all duration-200 hover:bg-primary/90 hover:-translate-y-0.5 active:scale-95 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 w-full mt-2">
                     <WhatsAppIcon className="w-4 h-4 sm:w-5 sm:h-5" />
                     {TEXTS.KITS.labels.primaryCta}
                   </a>
+                  <p className="flex items-center justify-center gap-1.5 text-[9px] uppercase tracking-widest text-primary/60 font-semibold mt-2">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    Compra 100% Segura
+                  </p>
                 </div>
               </div>
             </motion.div>

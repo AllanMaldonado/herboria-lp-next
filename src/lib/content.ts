@@ -1,5 +1,5 @@
 /**
- * content.ts — Dicionário central de todo o conteúdo do site Herboria.
+ * content.ts — Dicionário central de todo o conteúdo do site Energia Criativa.
  * Edite aqui para atualizar textos, imagens e dados em toda a aplicação.
  */
 
@@ -7,29 +7,58 @@
 // 💡 [TS] O uso de 'as const' (const assertion) informa ao TypeScript que este objeto é estritamente de leitura (readonly).
 // Isso permite inferência estreita (narrowing), onde o tipo da string literal é exato, prevenindo mutações e melhorando o autocompletar.
 const SITE = {
-  name: "Herboria",
-  tagline: "Saboaria Artesanal",
-  url: "https://herboria.com.br",
+  name: "Energia Criativa",
+  tagline: "Ateliê",
+  url: "https://energiacriativa.com.br",
   phone: "5511999999999",
-  instagram: "https://instagram.com/herboria",
-  facebook: "https://facebook.com/herboria",
+  instagram: "https://instagram.com/energiacriativa",
+  facebook: "https://facebook.com/energiacriativa",
   whatsappBase: "https://wa.me/5511999999999",
   whatsappGeneral:
-    "https://wa.me/5511999999999?text=Olá!%20Quero%20conhecer%20os%20kits%20Herboria!",
+    "https://wa.me/5511999999999?text=Olá!%20Quero%20conhecer%20os%20kits%20Energia Criativa!",
 } as const;
 
-// ─── IMAGENS ──────────────────────────────────────────────────────
 const IMAGES = {
-  heroComposition: "/hero-composition.png",
-  kitSerenidade: "/kit-serenidade.png",
-  kitVitalidade: "/kit-vitalidade.png",
-  kitPurificacao: "/kit-purificacao.png",
-  benefitsSoap: "/benefits-soap.png",
-  galleryLavender: "/gallery-lavender.png",
-  galleryRosemary: "/gallery-rosemary.png",
-  galleryCharcoal: "/gallery-charcoal.png",
-  galleryRose: "/gallery-rose.png",
-  artisanPortrait: "/artisan_portrait.png",
+  heroComposition: {
+    src: "/hero-composition.png",
+    blurDataURL: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8+P/tfwAJHwPnRj4mQAAAABJRU5ErkJggg=="
+  },
+  kitSerenidade: {
+    src: "/kit-serenidade.png",
+    blurDataURL: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8+P/tfwAJHwPnRj4mQAAAABJRU5ErkJggg=="
+  },
+  kitVitalidade: {
+    src: "/kit-vitalidade.png",
+    blurDataURL: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8+P/tfwAJHwPnRj4mQAAAABJRU5ErkJggg=="
+  },
+  kitPurificacao: {
+    src: "/kit-purificacao.png",
+    blurDataURL: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8+P/tfwAJHwPnRj4mQAAAABJRU5ErkJggg=="
+  },
+  benefitsSoap: {
+    src: "/benefits-soap.png",
+    blurDataURL: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8+P/tfwAJHwPnRj4mQAAAABJRU5ErkJggg=="
+  },
+  galleryLavender: {
+    src: "/gallery-lavender.png",
+    blurDataURL: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8+P/tfwAJHwPnRj4mQAAAABJRU5ErkJggg=="
+  },
+  galleryRosemary: {
+    src: "/gallery-rosemary.png",
+    blurDataURL: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8+P/tfwAJHwPnRj4mQAAAABJRU5ErkJggg=="
+  },
+  galleryCharcoal: {
+    src: "/gallery-charcoal.png",
+    blurDataURL: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8+P/tfwAJHwPnRj4mQAAAABJRU5ErkJggg=="
+  },
+  galleryRose: {
+    src: "/gallery-rose.png",
+    blurDataURL: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8+P/tfwAJHwPnRj4mQAAAABJRU5ErkJggg=="
+  },
+  artisanPortrait: {
+    src: "/artisan_portrait.png",
+    blurDataURL: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8+P/tfwAJHwPnRj4mQAAAABJRU5ErkJggg=="
+  },
 } as const;
 
 // ─── NAVEGAÇÃO ────────────────────────────────────────────────────
@@ -43,7 +72,7 @@ const NAV_LINKS = [
 // ─── HERO ─────────────────────────────────────────────────────────
 const HERO = {
   eyebrow: "Cultivando o bem-estar com",
-  title: "HERBORIA",
+  title: "ENERGIA CRIATIVA",
   description:
     "Sabonetes artesanais com óleos essenciais puros e glicerina vegetal preservada. Transforme seu banho em um ritual de aromaterapia e cuide da sua pele do jeito que ela merece.",
   cta: "Receber Catálogo",
@@ -54,28 +83,28 @@ const HERO = {
     {
       id: 0,
       src: IMAGES.heroComposition,
-      alt: "Coleção completa Herboria: sabonetes empilhados, óleo facial e planta suculenta",
+      alt: "Coleção completa Energia Criativa: sabonetes empilhados, óleo facial e planta suculenta",
       label: "Coleção Completa",
       tag: "Mais Popular",
     },
     {
       id: 1,
       src: IMAGES.kitSerenidade,
-      alt: "Kit Serenidade Herboria — Lavanda e Sálvia",
+      alt: "Kit Serenidade Energia Criativa — Lavanda e Sálvia",
       label: "Kit Serenidade",
       tag: "Lavanda & Sálvia",
     },
     {
       id: 2,
       src: IMAGES.kitVitalidade,
-      alt: "Kit Vitalidade Herboria — Alecrim e Capim Limão",
+      alt: "Kit Vitalidade Energia Criativa — Alecrim e Capim Limão",
       label: "Kit Vitalidade",
       tag: "Alecrim & Capim Limão",
     },
     {
       id: 3,
       src: IMAGES.kitPurificacao,
-      alt: "Kit Purificação Herboria — Carvão e Melaleuca",
+      alt: "Kit Purificação Energia Criativa — Carvão e Melaleuca",
       label: "Kit Purificação",
       tag: "Carvão & Melaleuca",
     },
@@ -101,7 +130,7 @@ const TRUST = {
 
 // ─── BENEFITS ─────────────────────────────────────────────────────
 const BENEFITS = {
-  tag: "Por que Herboria?",
+  tag: "Por que Energia Criativa?",
   title: "Seu banho transformado em ",
   titleAccent: "Aromaterapia",
   paragraphs: [
@@ -111,8 +140,8 @@ const BENEFITS = {
   cta: "Receber Catálogo",
   ctaHref: SITE.whatsappGeneral,
   image: {
-    src: IMAGES.benefitsSoap,
-    alt: "Sabonete artesanal Herboria com espuma densa e ervas frescas",
+    ...IMAGES.benefitsSoap,
+    alt: "Sabonete artesanal Energia Criativa com espuma densa e ervas frescas",
   },
   badge: { label: "Glicerina preservada", value: "100% Natural" },
 } as const;
@@ -187,7 +216,7 @@ const KITS = {
         "Induz sono reparador",
         "Pele aveludada pela manhã",
       ],
-      whatsapp: `${SITE.whatsappBase}?text=Olá!%20Quero%20o%20Kit%20Serenidade%20da%20Herboria!`,
+      whatsapp: `${SITE.whatsappBase}?text=Olá!%20Quero%20o%20Kit%20Serenidade%20da%20Energia Criativa!`,
     },
     {
       id: 2,
@@ -200,12 +229,12 @@ const KITS = {
         "Controle de oleosidade",
         "Ação antisséptica suave",
       ],
-      whatsapp: `${SITE.whatsappBase}?text=Olá!%20Quero%20o%20Kit%20Vitalidade%20da%20Herboria!`,
+      whatsapp: `${SITE.whatsappBase}?text=Olá!%20Quero%20o%20Kit%20Vitalidade%20da%20Energia Criativa!`,
     },
     {
       id: 3,
       name: "Kit Purificação",
-      desc: "Carvão Ativado, Melaleuca & Hortelã. Limpeza detox profunda com frescor duradouro. Para quem quer pele limpa de verdade — sem resíduos, sem entupir os poros.",
+      desc: "Carvão Ativado, Melaleuca & Hortelã. Limpeza detox profunda com frescor duradouro. Para quem quer pele limpa de verdade — sem resíduos.",
       price: "R$ 95,90",
       img: IMAGES.kitPurificacao,
       benefits: [
@@ -213,7 +242,7 @@ const KITS = {
         "Ação secativa sem ressecar",
         "Frescor revigorante",
       ],
-      whatsapp: `${SITE.whatsappBase}?text=Olá!%20Quero%20o%20Kit%20Purificação%20da%20Herboria!`,
+      whatsapp: `${SITE.whatsappBase}?text=Olá!%20Quero%20o%20Kit%20Purificação%20da%20Energia Criativa!`,
     },
   ],
 } as const;
@@ -224,7 +253,7 @@ const CTA_SECTION = {
   title: "Seu banho merece",
   titleItalic: "ser um ritual",
   description:
-    "Cada barra Herboria é curada por mais de 5 semanas em temperatura controlada. O estoque é limitado — produzido em pequenos lotes para garantir qualidade máxima. Garanta o seu kit agora pelo WhatsApp.",
+    "Cada barra Energia Criativa é curada por mais de 5 semanas em temperatura controlada. O estoque é limitado — produzido em pequenos lotes para garantir qualidade máxima. Garanta o seu kit agora pelo WhatsApp.",
   cta: "Receber Catálogo",
   ctaHref: SITE.whatsappGeneral,
   stats: [
@@ -248,14 +277,14 @@ const ARTISAN = {
   tag: "Por Trás da Marca",
   title: "Prazer, sou a",
   titleAccent: "Kelly",
-  subtitle: "Fundadora e Artesã da Herboria.",
+  subtitle: "Fundadora e Artesã da Energia Criativa.",
   paragraphs: [
     "Minha jornada com a saboaria começou há 5 anos, quando busquei alternativas naturais para a pele extremamente sensível da minha filha. O que começou como uma necessidade na cozinha de casa, rapidamente se transformou em uma paixão profunda pelos óleos essenciais e pela botânica.",
     "Acredito que o banho não deve ser apenas uma etapa de limpeza mecânica no nosso dia, mas sim um momento sagrado de reconexão consigo mesma. Cada barra que crio passa por um processo lento e respeitoso de cura, garantindo que a natureza entregue o seu melhor para a sua pele.",
   ],
   image: {
-    src: IMAGES.artisanPortrait,
-    alt: "Helena, fundadora da Herboria, sorrindo em seu ateliê botânico",
+    ...IMAGES.artisanPortrait,
+    alt: "Helena, fundadora da Energia Criativa, sorrindo em seu ateliê botânico",
   },
 } as const;
 
@@ -263,7 +292,7 @@ const ARTISAN = {
 const TESTIMONIALS = {
   tag: "Depoimentos Reais",
   title: "A experiência",
-  titleAccent: "Herboria",
+  titleAccent: "Energia Criativa",
   subtitle:
     "Centenas de mulheres já transformaram o banho em ritual de autocuidado. Veja o que dizem.",
   items: [
@@ -273,8 +302,7 @@ const TESTIMONIALS = {
         "Foi como abrir um presente para mim mesma. O cheiro invade o banheiro antes de abrir a embalagem. Minha pele ficou macia logo na primeira semana. Nunca mais volto ao supermercado.",
       name: "Camila Dantas",
       tag: "Cliente verificada — Kit Serenidade",
-      avatar:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=80&h=80&auto=format&fit=crop&crop=face",
+      avatar: "/images/avatar1.jpg",
     },
     {
       id: 2,
@@ -282,8 +310,7 @@ const TESTIMONIALS = {
         "Sempre sofri com pele ressecada e sensível. O Kit Vitalidade mudou minha rotina em 7 dias. Nada mais de pele repuxando depois do banho. É uma experiência completamente diferente.",
       name: "Juliana Mendes",
       tag: "Cliente verificada — Kit Vitalidade",
-      avatar:
-        "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=80&h=80&auto=format&fit=crop&crop=face",
+      avatar: "/images/avatar2.jpg",
     },
     {
       id: 3,
@@ -291,8 +318,7 @@ const TESTIMONIALS = {
         "A aromaterapia do Capim Limão no banho muda completamente minha energia para trabalhar. Comprei 3 kits para presentear minhas amigas — a embalagem é linda. Todas amaram.",
       name: "Sofia Albuquerque",
       tag: "Cliente verificada — Coleção Completa",
-      avatar:
-        "https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?q=80&w=80&h=80&auto=format&fit=crop&crop=face",
+      avatar: "/images/avatar3.jpg",
     },
   ],
 } as const;
@@ -312,7 +338,7 @@ const FAQ = {
     {
       question: "Os sabonetes têm perfume, corante ou ingrediente artificial?",
       answer:
-        "Nunca. A Herboria usa apenas óleos essenciais terapêuticos certificados para aroma e ingredientes naturais para cor: argila roxa, carvão ativado, cacau, cúrcuma. Nenhum parabeno, nenhuma fragrância sintética, nenhum corante FD&C. O que você vê é exatamente o que entra na fórmula.",
+        "Nunca. A Energia Criativa usa apenas óleos essenciais terapêuticos certificados para aroma e ingredientes naturais para cor: argila roxa, carvão ativado, cacau, cúrcuma. Nenhum parabeno, nenhuma fragrância sintética, nenhum corante FD&C. O que você vê é exatamente o que entra na fórmula.",
     },
     {
       question: "Como comprar? Funciona pelo WhatsApp?",
@@ -326,7 +352,7 @@ const FAQ = {
         "Sim! Podemos personalizar rótulos, sinergias de aromas e embalagens exclusivamente para o seu evento. Recebemos encomendas com no mínimo 6 semanas de antecedência — o tempo de cura do sabonete é inegociável porque é o que garante a qualidade. Entre em contato pelo WhatsApp para orçamento.",
     },
     {
-      question: "Quanto tempo um sabonete Herboria dura?",
+      question: "Quanto tempo um sabonete Energia Criativa dura?",
       answer:
         "Uma barra dura entre 4 a 6 semanas no chuveiro com uso diário — 2 a 3x mais do que sabonetes industriais. Isso acontece porque nossa cura longa cria uma barra muito mais densa e compacta. Com um saboneteiro de madeira que drene bem, a durabilidade é ainda maior.",
     },
@@ -345,25 +371,23 @@ const FOOTER = {
   },
   links: {
     Produtos: [
-      "Kit Serenidade",
-      "Kit Vitalidade",
-      "Kit Purificação",
-      "Óleo Facial Botânico",
+      { label: "Kit Serenidade", href: "#colecoes" },
+      { label: "Kit Vitalidade", href: "#colecoes" },
+      { label: "Kit Purificação", href: "#colecoes" },
+      { label: "Galeria de Texturas", href: "#galeria" },
     ],
     Empresa: [
-      "Sobre a Herboria",
-      "Nossos Ingredientes",
-      "Sustentabilidade",
-      "Blog Botânico",
+      { label: "Sobre a Energia Criativa", href: "#sobre" },
+      { label: "Benefícios do Cold Process", href: "#beneficios" },
+      { label: "Dúvidas Frequentes", href: "#faq" },
     ],
     Contato: [
-      "WhatsApp",
-      "Instagram",
-      "Política da Loja",
-      "Perguntas Frequentes",
+      { label: "Falar no WhatsApp", href: SITE.whatsappGeneral },
+      { label: "Instagram", href: SITE.instagram },
+      { label: "Facebook", href: SITE.facebook },
     ],
   },
-  copyright: "© 2026 Herboria Saboaria . Todos os direitos reservados.",
+  copyright: "© 2026 Energia Criativa Saboaria ✦ Todos os direitos reservados.",
   madeIn: "Feito com cuidado no Brasil",
   socialLabel: "Redes Sociais",
   tagline: "O luxo puro da natureza em cada banho.",

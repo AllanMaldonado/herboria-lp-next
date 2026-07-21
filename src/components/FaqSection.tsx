@@ -5,6 +5,7 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import { staggerContainer, fadeUp, accordionContent } from "@/lib/animations";
 import { IN_VIEW_OPTIONS } from "@/lib/animations";
 import { TEXTS } from "@/lib/content";
+import { trackFaqExpand } from "@/lib/tracking";
 
 function FaqItem({ question, answer, isOpen, onToggle }: { question: string; answer: string; isOpen: boolean; onToggle: () => void }) {
   return (
@@ -47,11 +48,38 @@ function FaqItem({ question, answer, isOpen, onToggle }: { question: string; ans
 
 export function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const ref = useRef(null);
+  const ref = useRef<HTMLElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, IN_VIEW_OPTIONS);
 
+  // Close when scrolling out of view
+  useEffect(() => {
+    if (!inView) {
+      setOpenIndex(null);
+    }
+  }, [inView]);
+
+  // Close when clicking outside the accordion list
+  useEffect(() => {
+    function handleOutside(e: MouseEvent | TouchEvent) {
+      if (openIndex !== null && listRef.current && !listRef.current.contains(e.target as Node)) {
+        setOpenIndex(null);
+      }
+    }
+    
+    if (openIndex !== null) {
+      document.addEventListener("mousedown", handleOutside);
+      document.addEventListener("touchstart", handleOutside);
+    }
+    
+    return () => {
+      document.removeEventListener("mousedown", handleOutside);
+      document.removeEventListener("touchstart", handleOutside);
+    };
+  }, [openIndex]);
+
   return (
-    <section id="faq" ref={ref} className="py-20 lg:py-32 bg-secondary/20">
+    <section id="faq" ref={ref} className="py-20 lg:py-32 bg-secondary/20 snap-start">
       <div className="mx-auto max-w-3xl px-6 lg:px-8">
         <motion.div
           variants={staggerContainer(0.08)}
@@ -59,10 +87,10 @@ export function FaqSection() {
           animate={inView ? "show" : "hidden"}
           className="text-center mb-14"
         >
-          <motion.span variants={fadeUp} className="font-sans text-[11px] font-semibold tracking-[0.2em] uppercase text-primary mb-4 block">
+          <motion.span variants={fadeUp} className="font-sans text-[11px] font-semibold tracking-[0.2em] uppercase text-primary mb-2 block">
             {TEXTS.FAQ.tag}
           </motion.span>
-          <motion.h2 variants={fadeUp} className="font-heading text-4xl sm:text-5xl font-medium text-foreground tracking-tight mb-4">
+          <motion.h2 variants={fadeUp} className="font-heading text-4xl sm:text-5xl font-medium text-foreground tracking-tight mb-2">
             {TEXTS.FAQ.title}
           </motion.h2>
           <motion.p variants={fadeUp} className="font-sans text-sm text-muted-foreground max-w-md mx-auto leading-relaxed">
@@ -71,6 +99,7 @@ export function FaqSection() {
         </motion.div>
 
         <motion.div
+          ref={listRef}
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.2, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
@@ -81,7 +110,12 @@ export function FaqSection() {
               question={item.question}
               answer={item.answer}
               isOpen={openIndex === i}
-              onToggle={() => setOpenIndex(openIndex === i ? null : i)}
+              onToggle={() => {
+                const isOpening = openIndex !== i;
+                setOpenIndex(openIndex === i ? null : i);
+                // Only track when expanding, not collapsing
+                if (isOpening) trackFaqExpand({ question: item.question });
+              }}
             />
           ))}
         </motion.div>
