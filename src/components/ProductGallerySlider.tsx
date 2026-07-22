@@ -76,7 +76,7 @@ export function ProductGallerySlider() {
                   <div className="absolute bottom-5 left-5 right-5 translate-y-1.5 group-hover:translate-y-0 transition-transform duration-300">
                     <p className="text-white/65 text-[10px] font-medium tracking-widest uppercase mb-1 font-sans">{item.subtitle}</p>
                     <h3 className="text-white font-heading text-xl mb-1">{item.title}</h3>
-                    <p className="text-white/80 text-xs font-sans opacity-0 group-hover:opacity-100 transition-opacity duration-300 leading-relaxed">{item.desc}</p>
+                    <p className="text-white text-xs font-sans opacity-0 group-hover:opacity-100 transition-opacity duration-300 leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               </CarouselItem>

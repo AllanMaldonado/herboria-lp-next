@@ -44,7 +44,7 @@ export const BRAND_FONTS = {
 // Controla como o logo é exibido no Header e Footer.
 export const BRAND_LOGO = {
   /**
-   * "emblem" → usa o SVG inline atual (BotanicalEmblem)
+   * "emblem" → usa o SVG inline atual (emblema do Ateliê)
    * "image"  → usa uma imagem de public/logo.svg ou public/logo.png
    * "text"   → exibe apenas o nome da marca em texto
    */
@@ -68,7 +68,7 @@ export const BRAND_LOGO = {
 // Controla o efeito decorativo de fundo nas seções hero e intermediárias.
 export const BRAND_BG_EFFECT = {
   /**
-   * "blob"  → formas orgânicas fluidas com gradiente (atual: botânica/beleza)
+   * "blob"  → formas orgânicas fluídas com gradiente (atual: saboaria artesanal/beleza)
    * "glow"  → borrão difuso de luz suave (wellness, premium, SaaS)
    * "grid"  → malha pontilhada ou linear estática (tech, fintech, corporativo)
    * "none"  → sem efeito de fundo (minimalista, editorial)

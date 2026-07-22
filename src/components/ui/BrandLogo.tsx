@@ -4,11 +4,11 @@
  * BrandLogo — Componente genérico de logo da marca.
  *
  * Lê BRAND_LOGO de src/lib/brand.ts para decidir qual logo exibir.
- * Isso desacopla o logo da Herboria do Header e Footer, permitindo
+ * Isso desacopla o logo da Energia Criativa do Header e Footer, permitindo
  * trocar para qualquer outra marca sem alterar esses componentes.
  *
  * Modes:
- *   "emblem" → SVG inline atual (BotanicalEmblem da Herboria)
+ *   "emblem" → SVG inline atual (BotanicalEmblem da Energia Criativa)
  *   "image"  → <img> ou next/image com src de BRAND_LOGO.imageSrc
  *   "text"   → apenas texto (nome da marca em fonte heading)
  */
@@ -45,15 +45,15 @@ export function BrandLogo({
   taglineClassName = "",
 }: BrandLogoProps) {
   const textColor = light ? "text-white" : "text-foreground";
-  const subColor  = light ? "text-white/60" : "text-muted-foreground";
+  const subColor  = light ? "text-white" : "text-muted-foreground";
 
   const textBlock = !hideText && (
     <div className="leading-none text-center md:text-left hidden sm:flex sm:flex-col" aria-hidden="true">
+      <span className={cn(`font-sans text-[9px] tracking-[0.22em] uppercase block mb-0.5 ${subColor}`, taglineClassName)}>
+        {TEXTS.SITE.tagline}
+      </span>
       <span className={cn(`font-heading text-[17px] font-semibold tracking-[0.18em] uppercase block ${textColor}`, textClassName)}>
         {TEXTS.SITE.name}
-      </span>
-      <span className={cn(`font-sans text-[9px] tracking-[0.22em] uppercase block -mt-0.5 ${subColor}`, taglineClassName)}>
-        {TEXTS.SITE.tagline}
       </span>
     </div>
   );
@@ -88,14 +88,14 @@ export function BrandLogo({
   // ── type: "text" ───────────────────────────────────────────────
   return (
     <div className={cn("flex flex-col", className)}>
-      <span className={cn(`font-heading text-2xl font-semibold tracking-[0.18em] uppercase block ${textColor}`, textClassName)}>
-        {TEXTS.SITE.name}
-      </span>
       {!hideText && (
-        <span className={cn(`font-sans text-[10px] tracking-[0.22em] uppercase block -mt-0.5 ${subColor}`, taglineClassName)}>
+        <span className={cn(`font-sans text-[10px] tracking-[0.22em] uppercase block mb-0.5 ${subColor}`, taglineClassName)}>
           {TEXTS.SITE.tagline}
         </span>
       )}
+      <span className={cn(`font-heading text-2xl font-semibold tracking-[0.18em] uppercase block ${textColor}`, textClassName)}>
+        {TEXTS.SITE.name}
+      </span>
     </div>
   );
 }

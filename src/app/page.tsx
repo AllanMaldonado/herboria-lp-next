@@ -110,7 +110,7 @@ export default function Home() {
         <div className="lg:min-h-[100dvh] flex flex-col snap-start">
           <div className="my-auto w-full flex flex-col">
             <section
-              aria-label="Energia Criativa — Saboaria Botânica"
+              aria-label={TEXTS.SITE_META.ariaHero}
               className="relative z-30 pt-28 pb-16 lg:pt-0 lg:pb-0"
             >
               <BackgroundEffect

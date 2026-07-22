@@ -91,7 +91,7 @@ export function CollectionsSection() {
                     placeholder="blur"
                     blurDataURL={kit.img.blurDataURL}
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    sizes="(max-width: 768px) 90vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   {'tag' in kit && kit.tag && (
                     <span className="absolute top-3 left-3 bg-primary text-primary-foreground px-3 py-1 text-[10px] font-semibold tracking-widest uppercase">

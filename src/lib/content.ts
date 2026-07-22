@@ -18,6 +18,52 @@ const SITE = {
     "https://wa.me/5511999999999?text=Olá!%20Quero%20conhecer%20os%20kits%20Energia Criativa!",
 } as const;
 
+// ─── SITE META ────────────────────────────────────────────────────
+// 💡 Strings de marca usadas em metadata do Next.js, JSON-LD e aria-labels.
+// Altere aqui e todos os arquivos que consomem TEXTS.SITE_META serão atualizados automaticamente.
+const SITE_META = {
+  // Nome curto — usado no logo, créditos, Open Graph name, JSON-LD name
+  shortName: "Energia Criativa",
+  // Nome completo da marca — usado em author, siteName, JSON-LD, aria-labels
+  fullName: "Ateliê Energia Criativa",
+  // Descrição da categoria da marca (curta)
+  category: "Saboaria Artesanal",
+  // Descrição da marca para JSON-LD e meta description da home
+  description:
+    "Sabonetes artesanais Ateliê Energia Criativa: 100% naturais, com óleos essenciais puros e glicerina vegetal preservada. Transforme seu banho em aromaterapia. Kits de presente únicos. Produção limitada.",
+  // Descrição curta — usada em JSON-LD WebSite e Twitter card
+  descriptionShort:
+    "Transforme seu banho em aromaterapia. 100% naturais, produção artesanal limitada.",
+  // Descrição do negócio — usada em JSON-LD LocalBusiness
+  descriptionBusiness:
+    "Ateliê de saboaria artesanal especializado em sabonetes com óleos essenciais puros e ingredientes 100% naturais.",
+  // Título padrão da aba/tab (sem template)
+  titleDefault:
+    "Energia Criativa | Ateliê de Saboaria Artesanal — Sabonetes Naturais Premium",
+  // Template para páginas internas (%s será substituído pelo título da página)
+  titleTemplate: "%s | Ateliê Energia Criativa",
+  // Título para Open Graph e Twitter
+  titleOg: "Energia Criativa | Sabonetes Artesanais — 100% Naturais",
+  titleTwitter: "Energia Criativa | Sabonetes Artesanais",
+  // Imagem principal Open Graph
+  ogImage: "/hero-composition.png",
+  // aria-label da seção Hero na page.tsx
+  ariaHero: "Ateliê Energia Criativa — Saboaria Artesanal",
+  // Keywords SEO
+  keywords: [
+    "sabonetes artesanais",
+    "sabonete natural",
+    "saboaria artesanal",
+    "óleos essenciais",
+    "aromaterapia",
+    "sabonete cold process",
+    "kit presente sabonete",
+    "sabonete orgânico",
+    "Energia Criativa",
+    "sabonete glicerina",
+  ],
+} as const;
+
 const IMAGES = {
   heroComposition: {
     src: "/hero-composition.png",
@@ -187,7 +233,7 @@ const GALLERY = {
     },
     {
       id: 5,
-      title: "Botânico Verde",
+      title: "Verde Selvagem",
       subtitle: "Aloe Vera & Ervas Finas",
       img: IMAGES.galleryLavender,
       desc: "Equilíbrio e enraizamento com a força das ervas da terra.",
@@ -283,12 +329,12 @@ const ARTISAN = {
   titleAccent: "Kelly",
   subtitle: "Fundadora e Artesã da Energia Criativa.",
   paragraphs: [
-    "Minha jornada com a saboaria começou há 5 anos, quando busquei alternativas naturais para a pele extremamente sensível da minha filha. O que começou como uma necessidade na cozinha de casa, rapidamente se transformou em uma paixão profunda pelos óleos essenciais e pela botânica.",
+    "Minha jornada com a saboaria começou há 5 anos, quando busquei alternativas naturais para a pele extremamente sensível da minha filha. O que começou como uma necessidade na cozinha de casa, rapidamente se transformou em uma paixão profunda pelos óleos essenciais e pela saboaria artesanal.",
     "Acredito que o banho não deve ser apenas uma etapa de limpeza mecânica no nosso dia, mas sim um momento sagrado de reconexão consigo mesma. Cada barra que crio passa por um processo lento e respeitoso de cura, garantindo que a natureza entregue o seu melhor para a sua pele.",
   ],
   image: {
     ...IMAGES.artisanPortrait,
-    alt: "Kelly, fundadora da Energia Criativa, sorrindo em seu ateliê botânico",
+    alt: "Kelly, fundadora do Ateliê Energia Criativa, sorrindo em seu ateliê artesanal",
   },
 } as const;
 
@@ -337,7 +383,7 @@ const FAQ = {
     {
       question: "O que é o método Cold Process e por que é superior?",
       answer:
-        "Cold Process é a saboaria artesanal feita a frio — sem aquecimento industrial. Misturamos óleos botânicos e lixívia em baixa temperatura e deixamos curar por 5 a 6 semanas. Esse processo preserva 100% das propriedades terapêuticas dos óleos essenciais e gera glicerina natural que hidrata profundamente — a mesma que fábricas removem para vender separado.",
+        "Cold Process é a saboaria artesanal feita a frio — sem aquecimento industrial. Misturamos óleos essenciais e lixívia em baixa temperatura e deixamos curar por 5 a 6 semanas. Esse processo preserva 100% das propriedades terapêuticas dos óleos essenciais e gera glicerina natural que hidrata profundamente — a mesma que fábricas removem para vender separado.",
     },
     {
       question: "Os sabonetes têm perfume, corante ou ingrediente artificial?",
@@ -391,7 +437,7 @@ const FOOTER = {
       { label: "Facebook", href: SITE.facebook },
     ],
   },
-  copyright: "© 2026 Energia Criativa Saboaria ✦ Todos os direitos reservados.",
+  copyright: "© 2026 Ateliê Energia Criativa ✦ Todos os direitos reservados.",
   madeIn: "Feito com cuidado no Brasil",
   socialLabel: "Redes Sociais",
   tagline: "O luxo puro da natureza em cada banho.",
@@ -399,6 +445,7 @@ const FOOTER = {
 
 export const TEXTS = {
   SITE,
+  SITE_META,
   IMAGES,
   NAV_LINKS,
   HERO,

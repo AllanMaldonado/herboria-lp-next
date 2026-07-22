@@ -76,7 +76,7 @@ export function GreenCtaSection() {
               {TEXTS.CTA_SECTION.stats.slice(0, 2).map((s) => (
                 <motion.div key={s.value} variants={fadeUp} className="flex flex-col items-center lg:items-start text-center lg:text-left">
                   <span className="font-heading text-3xl font-medium text-white block mb-1">{s.value}</span>
-                  <span className="font-sans text-[11px] text-white/80 leading-snug uppercase tracking-widest block">{s.label}</span>
+                  <span className="font-sans text-[11px] text-white leading-snug uppercase tracking-widest block">{s.label}</span>
                 </motion.div>
               ))}
             </motion.div>
@@ -102,7 +102,7 @@ export function GreenCtaSection() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90" />
               <div className="absolute bottom-4 left-4 right-4">
-                <span className="text-white/80 text-[9px] uppercase tracking-widest block mb-0.5">{TEXTS.GALLERY.items[0].subtitle}</span>
+                <span className="text-white text-[9px] uppercase tracking-widest block mb-0.5">{TEXTS.GALLERY.items[0].subtitle}</span>
                 <span className="text-white font-heading text-xl leading-tight">{TEXTS.GALLERY.items[0].title}</span>
               </div>
             </div>
@@ -120,7 +120,7 @@ export function GreenCtaSection() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90" />
               <div className="absolute bottom-4 left-4 right-4">
-                <span className="text-white/80 text-[9px] uppercase tracking-widest block mb-0.5">{TEXTS.GALLERY.items[1].subtitle}</span>
+                <span className="text-white text-[9px] uppercase tracking-widest block mb-0.5">{TEXTS.GALLERY.items[1].subtitle}</span>
                 <span className="text-white font-heading text-lg leading-tight">{TEXTS.GALLERY.items[1].title}</span>
               </div>
             </div>
@@ -138,7 +138,7 @@ export function GreenCtaSection() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90" />
               <div className="absolute bottom-4 left-4 right-4">
-                <span className="text-white/80 text-[9px] uppercase tracking-widest block mb-0.5">{TEXTS.GALLERY.items[2].subtitle}</span>
+                <span className="text-white text-[9px] uppercase tracking-widest block mb-0.5">{TEXTS.GALLERY.items[2].subtitle}</span>
                 <span className="text-white font-heading text-lg leading-tight">{TEXTS.GALLERY.items[2].title}</span>
               </div>
             </div>

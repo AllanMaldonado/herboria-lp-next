@@ -1,5 +1,5 @@
 /**
- * BotanicalEmblem — SVG do emblema botânico da Herboria.
+ * BotanicalEmblem — SVG do emblema botânico da Energia Criativa.
  * Reutilizado no Header e Footer.
  */
 export function BotanicalEmblem({ className = "" }: { className?: string }) {

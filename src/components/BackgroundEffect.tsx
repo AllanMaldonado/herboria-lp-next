@@ -7,7 +7,7 @@
  * O variant é controlado por src/lib/brand.ts → BRAND_BG_EFFECT.variant
  *
  * Variants:
- *   "blob"  → formas orgânicas fluidas (atual, botânica/beleza)
+ *   "blob"  → formas orgânicas fluídas (atual, saboaria artesanal/beleza)
  *   "glow"  → borrão difuso de luz suave (wellness, SaaS premium)
  *   "grid"  → malha pontilhada estática (tech, fintech)
  *   "none"  → sem efeito (minimalista)

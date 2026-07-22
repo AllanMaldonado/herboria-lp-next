@@ -40,7 +40,7 @@ export function TestimonialSection() {
   const items = [...TEXTS.TESTIMONIALS.items, ...TEXTS.TESTIMONIALS.items];
 
   return (
-    <section ref={ref} className="py-20 lg:py-32 bg-secondary/10 overflow-hidden snap-start">
+    <section ref={ref} className="py-20 lg:py-32 bg-secondary/10 overflow-x-hidden snap-start">
       <div className="relative z-20 mx-auto max-w-7xl px-6 lg:px-12">
 
         {/* Cabeçalho */}
@@ -63,7 +63,7 @@ export function TestimonialSection() {
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "show" : "hidden"}
-          className="relative px-2 lg:px-10"
+          className="relative px-2 lg:px-10 py-4"
         >
           <Carousel
             setApi={setApi}

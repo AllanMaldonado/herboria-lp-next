@@ -62,7 +62,7 @@ export function SectionHeader({
           variants={fadeUp}
           className={cn(
             "font-sans text-sm leading-relaxed",
-            light ? "text-white/80" : "text-muted-foreground",
+            light ? "text-white" : "text-muted-foreground",
             center ? "max-w-xl mx-auto" : "max-w-sm"
           )}
         >
