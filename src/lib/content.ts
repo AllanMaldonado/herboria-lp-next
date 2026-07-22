@@ -79,6 +79,10 @@ const HERO = {
   ctaHelper: "Fale com a gente e receba seu kit personalizado",
   ctaHref: SITE.whatsappGeneral,
   badge: "100% Puro",
+  heroBadge: {
+    quote: "Minha pele mudou na 1ª semana.",
+    author: "Camila D.",
+  },
   products: [
     {
       id: 0,
@@ -284,7 +288,7 @@ const ARTISAN = {
   ],
   image: {
     ...IMAGES.artisanPortrait,
-    alt: "Helena, fundadora da Energia Criativa, sorrindo em seu ateliê botânico",
+    alt: "Kelly, fundadora da Energia Criativa, sorrindo em seu ateliê botânico",
   },
 } as const;
 

@@ -7,7 +7,7 @@ import { motion, useInView } from "framer-motion";
 import { AnimatedHeroContent } from "@/components/AnimatedHeroContent";
 import { HeroImages } from "@/components/HeroImages";
 import { BenefitsSection } from "@/components/BenefitsSection";
-import { FluidBlob } from "@/components/FluidBlob";
+import { BackgroundEffect } from "@/components/BackgroundEffect";
 
 import { CollectionsSection } from "@/components/CollectionsSection";
 import { AboutSection } from "@/components/AboutSection";
@@ -16,23 +16,9 @@ import { GreenCtaSection } from "@/components/GreenCtaSection";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { FaqSection } from "@/components/FaqSection";
-import { StarIcon } from "@/components/ui/Icons";
-import { staggerContainer, fadeUp } from "@/lib/animations";
-import { IN_VIEW_OPTIONS } from "@/lib/animations";
+import { StarRating } from "@/components/ui/Icons";
+import { staggerContainer, fadeUp, IN_VIEW_OPTIONS } from "@/lib/animations";
 import { TEXTS } from "@/lib/content";
-
-function Stars() {
-  return (
-    <div className="flex gap-0.5" aria-hidden="true">
-      {/* 💡 [React] Array.from() cria um array iterável. 
-          O uso da prop 'key' no React é essencial na renderização de listas 
-          para que o React consiga rastrear a identidade de cada item e não refazer todo o DOM. */}
-      {Array.from({ length: 5 }).map((_, i) => (
-        <StarIcon key={i} className="w-4 h-4 fill-primary text-primary" />
-      ))}
-    </div>
-  );
-}
 
 
 
@@ -127,7 +113,7 @@ export default function Home() {
               aria-label="Energia Criativa — Saboaria Botânica"
               className="relative z-30 pt-28 pb-16 lg:pt-0 lg:pb-0"
             >
-              <FluidBlob
+              <BackgroundEffect
                 side="hero"
                 id="hero-blob"
                 className="top-0 -right-[40%] w-[120vw] h-[120vw] sm:-right-[15%] sm:w-[90vw] md:-right-[15%] md:w-[50vw] md:h-[135%] max-w-[1000px] translate-x-12 md:translate-x-8"

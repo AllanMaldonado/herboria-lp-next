@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import { staggerContainer, fadeUp, accordionContent } from "@/lib/animations";
-import { IN_VIEW_OPTIONS } from "@/lib/animations";
+import { SectionHeader } from "./ui/SectionHeader";
+import { staggerContainer, fadeUp, accordionContent, IN_VIEW_OPTIONS } from "@/lib/animations";
 import { TEXTS } from "@/lib/content";
 import { trackFaqExpand } from "@/lib/tracking";
 
@@ -80,22 +80,18 @@ export function FaqSection() {
 
   return (
     <section id="faq" ref={ref} className="py-20 lg:py-32 bg-secondary/20 snap-start">
-      <div className="mx-auto max-w-3xl px-6 lg:px-8">
+      <div className="mx-auto max-w-3xl px-6 lg:px-12">
         <motion.div
           variants={staggerContainer(0.08)}
           initial="hidden"
           animate={inView ? "show" : "hidden"}
           className="text-center mb-14"
         >
-          <motion.span variants={fadeUp} className="font-sans text-[11px] font-semibold tracking-[0.2em] uppercase text-primary mb-2 block">
-            {TEXTS.FAQ.tag}
-          </motion.span>
-          <motion.h2 variants={fadeUp} className="font-heading text-4xl sm:text-5xl font-medium text-foreground tracking-tight mb-2">
-            {TEXTS.FAQ.title}
-          </motion.h2>
-          <motion.p variants={fadeUp} className="font-sans text-sm text-muted-foreground max-w-md mx-auto leading-relaxed">
-            {TEXTS.FAQ.subtitle}
-          </motion.p>
+          <SectionHeader
+            tag={TEXTS.FAQ.tag}
+            title={TEXTS.FAQ.title}
+            subtitle={TEXTS.FAQ.subtitle}
+          />
         </motion.div>
 
         <motion.div

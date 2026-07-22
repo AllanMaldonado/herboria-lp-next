@@ -15,7 +15,7 @@ export function FloatingWhatsApp() {
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ delay: 1, type: "spring", stiffness: 260, damping: 20 }}
-      className="fixed bottom-6 right-6 z-[100] flex items-center justify-center w-14 h-14 bg-primary text-primary-foreground rounded-full shadow-2xl hover:scale-110 hover:shadow-[0_10px_25px_-5px_var(--primary)] hover:shadow-primary/50 transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+      className="fixed bottom-6 right-6 z-[100] flex items-center justify-center w-14 h-14 bg-primary text-primary-foreground rounded-full shadow-xl shadow-black/20 hover:scale-110 hover:shadow-2xl hover:shadow-primary/50 transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2"
       aria-label="Fale conosco pelo WhatsApp"
     >
       <WhatsAppIcon className="w-7 h-7" />

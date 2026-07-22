@@ -73,3 +73,49 @@ export function FacebookIcon({ className = "w-4 h-4" }: { className?: string }) 
     </svg>
   );
 }
+
+/**
+ * StarRating — Componente unificado de rating de estrelas.
+ *
+ * Substitui as três implementações dispersas:
+ *   - função Stars() em page.tsx (aria-hidden, gap-0.5, w-4 h-4, fill-primary)
+ *   - função Stars() em TestimonialSection.tsx (role="img", gap-1, w-3.5 h-3.5, fill-primary)
+ *   - inline em HeroImages.tsx ([1,2,3,4,5].map(), text-yellow-500)
+ *
+ * Props:
+ *  @param count     - Número de estrelas (padrão 5)
+ *  @param iconClass - Classe do SVG (tamanho, ex: "w-4 h-4" ou "w-3.5 h-3.5")
+ *  @param colorClass- Classe de cor (ex: "fill-primary text-primary" ou "fill-yellow-500 text-yellow-500")
+ *  @param className - Classe do wrapper div (gap, margem)
+ *  @param semantic  - Se true: role="img" aria-label. Se false: aria-hidden="true" (decorativo)
+ *  @param label     - Texto aria-label quando semantic=true
+ */
+interface StarRatingProps {
+  count?: number;
+  iconClass?: string;
+  colorClass?: string;
+  className?: string;
+  semantic?: boolean;
+  label?: string;
+}
+
+export function StarRating({
+  count = 5,
+  iconClass = "w-4 h-4",
+  colorClass = "fill-primary text-primary",
+  className = "flex gap-0.5",
+  semantic = false,
+  label,
+}: StarRatingProps) {
+  const ariaProps = semantic
+    ? { role: "img" as const, "aria-label": label ?? `${count} estrelas` }
+    : { "aria-hidden": true as const };
+
+  return (
+    <div className={className} {...ariaProps}>
+      {Array.from({ length: count }).map((_, i) => (
+        <StarIcon key={i} className={`${iconClass} ${colorClass}`} />
+      ))}
+    </div>
+  );
+}

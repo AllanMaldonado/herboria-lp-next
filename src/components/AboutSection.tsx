@@ -3,8 +3,8 @@
 import { useRef } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import { staggerContainer, fadeUp, fadeRight } from "@/lib/animations";
-import { IN_VIEW_OPTIONS } from "@/lib/animations";
+import { SectionHeader } from "./ui/SectionHeader";
+import { staggerContainer, fadeUp, fadeRight, IN_VIEW_OPTIONS } from "@/lib/animations";
 import { TEXTS } from "@/lib/content";
 
 export function AboutSection() {
@@ -54,18 +54,14 @@ export function AboutSection() {
             animate={inView ? "show" : "hidden"}
             className="flex flex-col justify-center text-center lg:text-left"
           >
-            <motion.span variants={fadeUp} className="font-sans text-[11px] font-semibold tracking-[0.2em] uppercase text-primary mb-2 block">
-              {TEXTS.ARTISAN.tag}
-            </motion.span>
-            
-            <motion.h2 variants={fadeUp} className="font-heading text-4xl sm:text-5xl font-medium text-foreground tracking-tight mb-2 leading-tight">
-              {TEXTS.ARTISAN.title}{" "}
-              <em className="text-primary not-italic">{TEXTS.ARTISAN.titleAccent}</em>
-            </motion.h2>
-            
-            <motion.p variants={fadeUp} className="font-sans text-sm text-muted-foreground leading-relaxed mb-5 max-w-lg mx-auto lg:mx-0">
-              {TEXTS.ARTISAN.subtitle}
-            </motion.p>
+            <SectionHeader
+              tag={TEXTS.ARTISAN.tag}
+              title={TEXTS.ARTISAN.title}
+              titleAccent={TEXTS.ARTISAN.titleAccent}
+              subtitle={TEXTS.ARTISAN.subtitle}
+              center={false}
+              className="mb-5"
+            />
             
             <div className="flex flex-col gap-5 mt-4 w-full">
               {TEXTS.ARTISAN.paragraphs.map((p, i) => (

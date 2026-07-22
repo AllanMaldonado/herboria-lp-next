@@ -1,15 +1,10 @@
-// 💡 [TS] 'import type' garante que o tipo Metadata não será incluído no bundle final de JavaScript (Zero JS).
 import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
-import { FacebookPixel } from "@/components/FacebookPixel";
+import { AnalyticsProvider } from "@/components/AnalyticsProvider";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { TEXTS } from "@/lib/content";
-import { GoogleAnalytics } from "@next/third-parties/google";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import Script from "next/script";
 
 // ─── FONTES — display:swap elimina FOIT, subset otimiza payload ──
 // 💡 [Next.js] next/font elimina o CLS (Cumulative Layout Shift) carregando fontes de forma otimizada.
@@ -134,7 +129,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" className="scroll-smooth snap-y snap-proximity">
+    <html lang="pt-BR" className="snap-y snap-proximity">
       <head>
         <link rel="preconnect" href="https://connect.facebook.net" crossOrigin="anonymous" />
         {/* JSON-LD */}
@@ -144,22 +139,9 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} ${cormorant.variable} antialiased`}>
-        <FacebookPixel />
+        <AnalyticsProvider />
         <Providers>{children}</Providers>
         <FloatingWhatsApp />
-        <GoogleAnalytics gaId="G-ABC123XYZ" />
-        <Analytics />
-        <SpeedInsights />
-        {/* Microsoft Clarity - Analytics de Sessão e Heatmaps */}
-        <Script id="microsoft-clarity" strategy="afterInteractive">
-          {`
-            (function(c,l,a,r,i,t,y){
-                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window, document, "clarity", "script", "CLARITY_ID_AQUI");
-          `}
-        </Script>
       </body>
     </html>
   );

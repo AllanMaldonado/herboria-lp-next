@@ -2,9 +2,12 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { BotanicalEmblem, WhatsAppIcon } from "./ui/Icons";
+import { WhatsAppIcon } from "./ui/Icons";
+import { BrandLogo } from "./ui/BrandLogo";
 import { TEXTS } from "@/lib/content";
 import { useState, useEffect } from "react";
+import { scrollToSection } from "@/lib/utils";
+import { trackHeaderCTA } from "@/lib/tracking";
 
 export function Header() {
   const [isAtTop, setIsAtTop] = useState(true);
@@ -16,10 +19,11 @@ export function Header() {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       const heroHeight = window.innerHeight;
-      
-      setIsAtTop(currentScrollY < heroHeight);
+      const atTop = currentScrollY < heroHeight;
 
-      if (currentScrollY < heroHeight) {
+      setIsAtTop(atTop);
+
+      if (atTop) {
         setIsVisible(false);
       } else {
         const diff = currentScrollY - lastScrollY;
@@ -53,16 +57,8 @@ export function Header() {
       <div className="mx-auto max-w-7xl px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0 transition-all duration-300">
         {/* Logo */}
         <div className="flex-1 flex justify-start">
-          <Link href="/" className="flex items-center gap-2.5 group shrink-0" aria-label="Herboria — Página inicial">
-            <BotanicalEmblem className="w-9 h-9 text-primary transition-transform duration-300 group-hover:scale-105" />
-            <div className="leading-none text-center md:text-left hidden sm:flex sm:flex-col gap-1.5">
-              <span className="font-sans text-[8px] sm:text-[9px] tracking-[0.5em] text-muted-foreground uppercase block ml-1">
-                {TEXTS.SITE.tagline}
-              </span>
-              <span className="font-heading text-[17px] font-semibold tracking-[0.18em] text-foreground uppercase block">
-                {TEXTS.SITE.name}
-              </span>
-            </div>
+          <Link href="/" onClick={(e) => { e.preventDefault(); scrollToSection(""); }} className="flex items-center gap-2.5 group shrink-0" aria-label={`${TEXTS.SITE.name} — Página inicial`}>
+            <BrandLogo />
           </Link>
         </div>
 
@@ -75,14 +71,7 @@ export function Header() {
               onClick={(e) => {
                 e.preventDefault();
                 const targetId = link.href.replace('/#', '').replace('#', '');
-                if (!targetId) {
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                  return;
-                }
-                const element = document.getElementById(targetId);
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
+                scrollToSection(targetId);
               }}
               className="font-sans text-[13px] font-medium text-foreground/70 hover:text-primary transition-colors duration-200 relative after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-0 after:bg-primary after:transition-all after:duration-200 hover:after:w-full focus-visible:outline-2 focus-visible:outline-primary focus-visible:rounded"
             >
@@ -94,9 +83,10 @@ export function Header() {
         {/* CTA */}
         <div className="hidden md:flex flex-1 justify-end">
           <a
-            href={TEXTS.HERO.ctaHref}
+            href={TEXTS.SITE.whatsappGeneral}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={trackHeaderCTA}
             className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-sans font-semibold text-[10px] sm:text-xs tracking-[0.18em] uppercase px-5 py-2.5 sm:px-6 sm:py-3 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30 active:scale-[0.98]"
           >
             <WhatsAppIcon className="w-4 h-4" />

@@ -11,9 +11,9 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from "@/components/ui/carousel";
-import { staggerContainer, fadeUp } from "@/lib/animations";
-import { IN_VIEW_OPTIONS } from "@/lib/animations";
+import { staggerContainer, fadeUp, IN_VIEW_OPTIONS } from "@/lib/animations";
 import { TEXTS } from "@/lib/content";
+import { SectionHeader } from "./ui/SectionHeader";
 
 /**
  * ProductGallerySlider — carrossel horizontal da linha de produtos.
@@ -27,7 +27,7 @@ export function ProductGallerySlider() {
   const inView = useInView(ref, IN_VIEW_OPTIONS);
 
   return (
-    <section id="galeria" className="py-20 lg:py-28 bg-background relative">
+    <section id="galeria-slider" className="py-20 lg:py-28 bg-background relative">
       <div className="relative z-20 mx-auto max-w-7xl px-6 lg:px-12 mb-12">
         <div ref={ref} className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <motion.div
@@ -35,15 +35,12 @@ export function ProductGallerySlider() {
             initial="hidden"
             animate={inView ? "show" : "hidden"}
           >
-            <motion.span variants={fadeUp} className="font-sans text-[11px] font-semibold tracking-[0.2em] uppercase text-primary mb-4 block">
-              {TEXTS.GALLERY.tag}
-            </motion.span>
-            <motion.h2 variants={fadeUp} className="font-heading text-4xl sm:text-5xl font-medium text-foreground tracking-tight mb-3">
-              {TEXTS.GALLERY.title}
-            </motion.h2>
-            <motion.p variants={fadeUp} className="font-sans text-sm text-muted-foreground max-w-md leading-relaxed">
-              {TEXTS.GALLERY.subtitle}
-            </motion.p>
+            <SectionHeader
+              tag={TEXTS.GALLERY.tag}
+              title={TEXTS.GALLERY.title}
+              subtitle={TEXTS.GALLERY.subtitle}
+              center={false}
+            />
           </motion.div>
         </div>
       </div>
@@ -67,7 +64,7 @@ export function ProductGallerySlider() {
                 <div className="w-full aspect-[3/4] rounded-2xl overflow-hidden relative group cursor-pointer">
                   <Image
                     src={item.img.src}
-                    alt={`${item.title} — ${item.subtitle} | Herboria`}
+                    alt={`${item.title} — ${item.subtitle} | ${TEXTS.SITE.name}`}
                     fill
                     loading="lazy"
                     placeholder="blur"

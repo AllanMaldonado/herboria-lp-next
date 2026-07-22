@@ -2,39 +2,47 @@
 // no cliente e do 'window', por isso é obrigatório o uso de 'use client' aqui.
 "use client";
 
+import { motion } from "framer-motion";
+import { staggerContainer, fadeUp } from "@/lib/animations";
 import { TEXTS } from "@/lib/content";
 import { WhatsAppIcon } from "./ui/Icons";
 import { trackHeroCTA } from "@/lib/tracking";
 
 export function AnimatedHeroContent() {
   return (
-    <div
-      className="flex flex-col justify-center items-center text-center lg:items-start lg:text-left relative z-10 animate-in fade-in slide-in-from-bottom-4 duration-1000 fill-mode-both"
+    <motion.div
+      variants={staggerContainer(0.09)}
+      initial="hidden"
+      animate="show"
+      className="flex flex-col justify-center items-center text-center lg:items-start lg:text-left relative z-10"
     >
       {/* Eyebrow */}
-      <p
+      <motion.p
+        variants={fadeUp}
         className="font-sans text-[11px] font-semibold tracking-[0.2em] uppercase text-primary mb-5 block"
       >
         {TEXTS.HERO.eyebrow}
-      </p>
+      </motion.p>
 
       {/* 💡 [SEO / HTML Semântico] Uso de apenas um <h1> por página, seguindo as melhores práticas de SEO. */}
       {/* Título principal — h1 único da página */}
-      <h1
+      <motion.h1
+        variants={fadeUp}
         className="font-heading font-light text-[#2D3B1F] tracking-widest leading-[1.1] mb-6 text-4xl sm:text-5xl lg:text-6xl xl:text-[4.5rem]"
       >
         {TEXTS.HERO.title}
-      </h1>
+      </motion.h1>
 
       {/* Descrição — copy persuasivo */}
-      <p
-        className="font-sans text-sm sm:text-base lg:text-lg leading-relaxed text-muted-foreground max-w-[480px] mb-10 mx-auto lg:mx-0 px-2 lg:px-0"
+      <motion.p
+        variants={fadeUp}
+        className="font-sans font-light text-sm sm:text-base lg:text-lg leading-relaxed text-muted-foreground max-w-[480px] mb-10 mx-auto lg:mx-0 px-2 lg:px-0"
       >
         {TEXTS.HERO.description}
-      </p>
+      </motion.p>
 
       {/* CTA e Frase de Apoio */}
-      <div className="flex flex-col items-center">
+      <motion.div variants={fadeUp} className="flex flex-col items-center lg:items-start">
         <a
           href={TEXTS.HERO.ctaHref}
           id="hero-cta"
@@ -50,7 +58,7 @@ export function AnimatedHeroContent() {
         <p className="mt-4 text-[11px] sm:text-xs font-medium text-muted-foreground/80 tracking-wide italic">
           {TEXTS.HERO.ctaHelper}
         </p>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

@@ -1,14 +1,20 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import Image from "next/image";
-import { staggerContainer, fadeUp, scaleIn } from "@/lib/animations";
-import { FluidBlob } from "./FluidBlob";
-import { IN_VIEW_OPTIONS } from "@/lib/animations";
+import { staggerContainer, fadeUp, IN_VIEW_OPTIONS } from "@/lib/animations";
+import { BackgroundEffect } from "./BackgroundEffect";
+import { SectionHeader } from "./ui/SectionHeader";
 import { TEXTS } from "@/lib/content";
 import { WhatsAppIcon } from "./ui/Icons";
 import { trackKitBuy, trackKitModalOpen } from "@/lib/tracking";
+
+/** Converte preco no formato "R$ 89,90" para "89.90" para uso em eventos de tracking. */
+function parsePrice(price: string): string {
+  return price.replace('R$ ', '').replace(',', '.');
+}
 
 export function CollectionsSection() {
   const [selected, setSelected] = useState<(typeof TEXTS.KITS.items)[number] | null>(null);
@@ -35,7 +41,7 @@ export function CollectionsSection() {
   return (
     <>
       <section id="colecoes" ref={ref} className="relative z-10 overflow-visible py-20 lg:py-32 bg-background snap-start">
-        <FluidBlob
+        <BackgroundEffect
           side="left"
           id="collections-blob"
           className="w-[150vw] h-[150vw] md:w-[60vw] md:h-[60vw] max-w-[850px] max-h-[850px] -left-[80%] md:-left-[15%] top-[15%] md:top-[60%] -translate-y-1/2"
@@ -51,15 +57,11 @@ export function CollectionsSection() {
             animate={inView ? "show" : "hidden"}
             className="text-center max-w-xl mx-auto mb-14"
           >
-            <motion.span variants={fadeUp} className="font-sans text-[11px] font-semibold tracking-[0.2em] uppercase text-primary mb-2 block">
-              {TEXTS.KITS.tag}
-            </motion.span>
-            <motion.h2 variants={fadeUp} className="font-heading text-4xl sm:text-5xl font-medium text-foreground tracking-tight mb-2">
-              {TEXTS.KITS.title}
-            </motion.h2>
-            <motion.p variants={fadeUp} className="font-sans text-sm text-muted-foreground leading-relaxed">
-              {TEXTS.KITS.subtitle}
-            </motion.p>
+            <SectionHeader
+              tag={TEXTS.KITS.tag}
+              title={TEXTS.KITS.title}
+              subtitle={TEXTS.KITS.subtitle}
+            />
           </motion.div>
 
           <motion.div
@@ -74,7 +76,7 @@ export function CollectionsSection() {
                 variants={fadeUp}
                 className="group relative flex flex-col mx-auto w-full max-w-md lg:max-w-none bg-background rounded-2xl overflow-hidden border border-border/40 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer h-full"
                 onClick={() => {
-                  trackKitModalOpen({ kitName: kit.name, value: kit.price.replace('R$ ', '').replace(',', '.') });
+                  trackKitModalOpen({ kitName: kit.name, value: parsePrice(kit.price) });
                   setSelected(kit);
                 }}
               >
@@ -111,7 +113,7 @@ export function CollectionsSection() {
                         rel="noopener noreferrer"
                         onClick={(e) => {
                           e.stopPropagation();
-                          trackKitBuy({ kitName: kit.name, value: kit.price.replace('R$ ', '').replace(',', '.') });
+                          trackKitBuy({ kitName: kit.name, value: parsePrice(kit.price) });
                         }}
                         className="w-full xl:flex-1 inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground font-sans text-[10px] lg:text-[11px] font-semibold tracking-[0.18em] uppercase px-3 py-3 rounded-full transition-all duration-200 hover:bg-primary/90 hover:-translate-y-0.5 active:scale-95 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 text-center whitespace-nowrap"
                       >
@@ -121,7 +123,7 @@ export function CollectionsSection() {
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          trackKitModalOpen({ kitName: kit.name, value: kit.price.replace('R$ ', '').replace(',', '.') });
+                          trackKitModalOpen({ kitName: kit.name, value: parsePrice(kit.price) });
                           setSelected(kit);
                         }}
                         className="group/btn w-full xl:flex-1 inline-flex items-center justify-center gap-1.5 bg-secondary/60 text-foreground font-sans text-[10px] lg:text-[11px] font-semibold tracking-[0.18em] uppercase px-3 py-3 rounded-full transition-all duration-200 hover:bg-secondary hover:-translate-y-0.5 active:scale-95 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 cursor-pointer text-center whitespace-nowrap"
@@ -159,7 +161,7 @@ export function CollectionsSection() {
                 if (info.offset.y > 100) setSelected(null);
               }}
               style={{ willChange: "transform, opacity" }}
-              className="relative w-full max-w-4xl sm:min-h-[500px] lg:min-h-[600px] bg-background sm:rounded-2xl rounded-t-[2rem] shadow-2xl overflow-hidden max-h-[92vh] flex flex-col sm:flex-row z-10"
+              className="relative w-full max-w-4xl sm:h-[500px] 2xl:h-[600px] bg-background sm:rounded-2xl rounded-t-[2rem] shadow-2xl overflow-hidden max-h-[92vh] flex flex-col sm:flex-row z-10"
             >
               {/* Drag Handle (Mobile only) */}
               <div className="absolute top-0 left-0 w-full h-12 flex justify-center items-start pt-3 sm:hidden z-30 bg-gradient-to-b from-black/40 to-transparent pointer-events-none">
@@ -173,32 +175,32 @@ export function CollectionsSection() {
                 <Image src={selected.img.src} alt={selected.name} fill placeholder="blur" blurDataURL={selected.img.blurDataURL} className="object-cover sm:object-cover drop-shadow-2xl scale-[1.1] sm:scale-100" sizes="50vw" priority />
               </div>
 
-              <div className="w-full sm:w-1/2 p-7 sm:p-12 flex flex-col pb-8 sm:pb-12 justify-center">
-                <span className="font-sans text-[10px] sm:text-[11px] font-semibold tracking-[0.2em] text-primary uppercase mb-2 sm:mb-3">{TEXTS.KITS.tag}</span>
-                <h2 className="font-heading text-2xl sm:text-4xl font-medium text-foreground mb-3 sm:mb-5">{selected.name}</h2>
-                <p className="font-sans text-xs sm:text-sm text-muted-foreground leading-relaxed mb-5 sm:mb-8">{selected.desc}</p>
+              <div className="w-full sm:w-1/2 p-7 sm:p-8 2xl:p-12 flex flex-col pb-8 sm:pb-8 2xl:pb-12 justify-center">
+                <span className="font-sans text-[10px] sm:text-[11px] font-semibold tracking-[0.2em] text-primary uppercase mb-2 sm:mb-2 2xl:mb-3">{TEXTS.KITS.tag}</span>
+                <h2 className="font-heading text-2xl sm:text-3xl 2xl:text-4xl font-medium text-foreground mb-3 sm:mb-3 2xl:mb-5">{selected.name}</h2>
+                <p className="font-sans text-xs sm:text-sm text-muted-foreground leading-relaxed mb-5 sm:mb-4 2xl:mb-8">{selected.desc}</p>
 
-                <h4 className="font-sans text-[10px] sm:text-xs font-semibold text-foreground uppercase tracking-widest mb-3 sm:mb-4">{TEXTS.KITS.labels.benefits}</h4>
-                <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
+                <h4 className="font-sans text-[10px] sm:text-xs font-semibold text-foreground uppercase tracking-widest mb-3 sm:mb-2 2xl:mb-4">{TEXTS.KITS.labels.benefits}</h4>
+                <ul className="space-y-2 sm:space-y-1.5 2xl:space-y-3 mb-6 sm:mb-4 2xl:mb-8">
                   {selected.benefits.map((b, i) => (
-                    <li key={i} className="flex items-center text-xs sm:text-sm text-muted-foreground font-sans gap-2 sm:gap-3">
+                    <li key={i} className="flex items-center text-xs sm:text-[13px] 2xl:text-sm text-muted-foreground font-sans gap-2 sm:gap-3">
                       <span className="text-primary text-xs sm:text-sm">✦</span>{b}
                     </li>
                   ))}
                 </ul>
 
-                <div className="mt-auto pt-5 sm:pt-8 border-t border-border/40 flex flex-col gap-4">
+                <div className="mt-auto pt-5 sm:pt-4 2xl:pt-8 border-t border-border/40 flex flex-col gap-4 sm:gap-2 2xl:gap-4">
                   <div>
-                    <p className="font-sans text-[10px] sm:text-xs text-muted-foreground uppercase tracking-widest mb-1 sm:mb-2">{TEXTS.KITS.labels.price}</p>
-                    <p className="font-heading text-2xl sm:text-4xl font-medium text-foreground">{selected.price}</p>
+                    <p className="font-sans text-[10px] sm:text-[10px] 2xl:text-xs text-muted-foreground uppercase tracking-widest mb-1 sm:mb-1 2xl:mb-2">{TEXTS.KITS.labels.price}</p>
+                    <p className="font-heading text-2xl sm:text-3xl 2xl:text-4xl font-medium text-foreground">{selected.price}</p>
                   </div>
                   <a href={selected.whatsapp} target="_blank" rel="noopener noreferrer"
-                    onClick={() => trackKitBuy({ kitName: selected.name, value: selected.price.replace('R$ ', '').replace(',', '.') })}
-                    className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground font-sans text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase px-6 py-3.5 sm:py-5 rounded-full transition-all duration-200 hover:bg-primary/90 hover:-translate-y-0.5 active:scale-95 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 w-full mt-2">
+                    onClick={() => trackKitBuy({ kitName: selected.name, value: parsePrice(selected.price) })}
+                    className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground font-sans text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase px-6 py-3.5 sm:py-4 2xl:py-5 rounded-full transition-all duration-200 hover:bg-primary/90 hover:-translate-y-0.5 active:scale-95 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 w-full mt-2 sm:mt-1 2xl:mt-2">
                     <WhatsAppIcon className="w-4 h-4 sm:w-5 sm:h-5" />
                     {TEXTS.KITS.labels.primaryCta}
                   </a>
-                  <p className="flex items-center justify-center gap-1.5 text-[9px] uppercase tracking-widest text-primary/60 font-semibold mt-2">
+                  <p className="flex items-center justify-center gap-1.5 text-[9px] uppercase tracking-widest text-primary/60 font-semibold mt-2 sm:mt-1 2xl:mt-2">
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                     Compra 100% Segura
                   </p>

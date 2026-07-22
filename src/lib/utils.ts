@@ -37,3 +37,23 @@ import { twMerge } from "tailwind-merge"
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
+/**
+ * scrollToSection(id)
+ *
+ * Realiza scroll suave até um elemento pelo seu `id`.
+ * Centraliza a lógica que estava duplicada em Header.tsx e BenefitsSection.tsx.
+ *
+ * @param id - O valor do atributo `id` do elemento alvo (sem o '#')
+ */
+export function scrollToSection(id: string): void {
+  if (typeof window === "undefined") return;
+  if (!id) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    return;
+  }
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+}

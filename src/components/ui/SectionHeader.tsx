@@ -3,6 +3,8 @@
  * Garante consistência visual em toda a landing page.
  */
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
+import { fadeUp } from "@/lib/animations";
 
 interface SectionHeaderProps {
   tag?: string;
@@ -26,16 +28,18 @@ export function SectionHeader({
   return (
     <div className={cn(center ? "text-center mx-auto" : "", className)}>
       {tag && (
-        <span
+        <motion.span
+          variants={fadeUp}
           className={cn(
             "font-sans text-[11px] font-semibold tracking-[0.2em] uppercase block mb-4",
             light ? "text-white/50" : "text-primary"
           )}
         >
           {tag}
-        </span>
+        </motion.span>
       )}
-      <h2
+      <motion.h2
+        variants={fadeUp}
         className={cn(
           "font-heading text-4xl sm:text-5xl font-medium tracking-tight leading-tight mb-4",
           light ? "text-white" : "text-foreground"
@@ -52,9 +56,10 @@ export function SectionHeader({
             {titleAccent}
           </em>
         )}
-      </h2>
+      </motion.h2>
       {subtitle && (
-        <p
+        <motion.p
+          variants={fadeUp}
           className={cn(
             "font-sans text-sm leading-relaxed",
             light ? "text-white/80" : "text-muted-foreground",
@@ -62,7 +67,7 @@ export function SectionHeader({
           )}
         >
           {subtitle}
-        </p>
+        </motion.p>
       )}
     </div>
   );

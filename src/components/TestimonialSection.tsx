@@ -12,20 +12,12 @@ import {
   CarouselNext,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import { staggerContainer, fadeUp } from "@/lib/animations";
-import { IN_VIEW_OPTIONS } from "@/lib/animations";
+import { staggerContainer, fadeUp, IN_VIEW_OPTIONS } from "@/lib/animations";
 import { TEXTS } from "@/lib/content";
-import { StarIcon } from "./ui/Icons";
+import { StarRating } from "./ui/Icons";
+import { SectionHeader } from "./ui/SectionHeader";
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
-function Stars() {
-  return (
-    <div className="flex gap-1 mb-4" role="img" aria-label="5 estrelas">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <StarIcon key={i} className="w-3.5 h-3.5 fill-primary text-primary" />
-      ))}
-    </div>
-  );
-}
 
 export function TestimonialSection() {
   const ref = useRef(null);
@@ -58,16 +50,12 @@ export function TestimonialSection() {
           animate={inView ? "show" : "hidden"}
           className="text-center mb-16"
         >
-          <motion.span variants={fadeUp} className="font-sans text-[11px] font-semibold tracking-[0.2em] uppercase text-primary mb-2 block">
-            {TEXTS.TESTIMONIALS.tag}
-          </motion.span>
-          <motion.h2 variants={fadeUp} className="font-heading text-4xl sm:text-5xl font-medium text-foreground tracking-tight mb-2">
-            {TEXTS.TESTIMONIALS.title}{" "}
-            <em className="text-primary not-italic">{TEXTS.TESTIMONIALS.titleAccent}</em>
-          </motion.h2>
-          <motion.p variants={fadeUp} className="font-sans text-sm text-muted-foreground leading-relaxed max-w-lg mx-auto">
-            {TEXTS.TESTIMONIALS.subtitle}
-          </motion.p>
+          <SectionHeader
+            tag={TEXTS.TESTIMONIALS.tag}
+            title={TEXTS.TESTIMONIALS.title}
+            titleAccent={TEXTS.TESTIMONIALS.titleAccent}
+            subtitle={TEXTS.TESTIMONIALS.subtitle}
+          />
         </motion.div>
 
         {/* Carrossel shadcn / Embla */}
@@ -83,6 +71,7 @@ export function TestimonialSection() {
               align: "start",
               loop: true,
             }}
+            plugins={[WheelGesturesPlugin()]}
             className="w-full relative"
           >
             <CarouselContent className="-ml-4 md:-ml-6">
@@ -92,7 +81,11 @@ export function TestimonialSection() {
                   className="pl-4 md:pl-6 md:basis-1/2 lg:basis-1/3"
                 >
                   <div className="h-full mx-auto w-full bg-white border border-border/30 rounded-2xl p-6 sm:p-8 flex flex-col shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
-                    <Stars />
+                    <StarRating
+                      iconClass="w-3.5 h-3.5"
+                      className="flex gap-1 mb-4"
+                      semantic
+                    />
                     <p className="font-heading italic text-base lg:text-lg text-foreground/90 leading-relaxed flex-grow mb-8">
                       &ldquo;{t.quote}&rdquo;
                     </p>

@@ -5,8 +5,8 @@ import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 
 import { BackgroundEffect } from "./BackgroundEffect";
-import { staggerContainer, fadeUp, fadeLeft } from "@/lib/animations";
-import { IN_VIEW_OPTIONS } from "@/lib/animations";
+import { SectionHeader } from "./ui/SectionHeader";
+import { staggerContainer, fadeUp, fadeLeft, IN_VIEW_OPTIONS } from "@/lib/animations";
 import { TEXTS } from "@/lib/content";
 import { WhatsAppIcon } from "./ui/Icons";
 import { trackGreenCTA } from "@/lib/tracking";
@@ -36,18 +36,15 @@ export function GreenCtaSection() {
             animate={inView ? "show" : "hidden"}
             className="flex flex-col items-center text-center lg:items-start lg:text-left w-full"
           >
-            <motion.span variants={fadeUp} className="font-sans text-[11px] font-semibold tracking-[0.2em] text-white/55 uppercase mb-2 block">
-              {TEXTS.CTA_SECTION.tag}
-            </motion.span>
-            <motion.h2 variants={fadeUp} className="font-heading text-4xl sm:text-5xl lg:text-6xl font-medium text-white tracking-tight leading-tight mb-2 max-w-xl">
-              {TEXTS.CTA_SECTION.title}{" "}
-              <em className="not-italic" style={{ color: "rgba(255,255,255,0.70)" }}>
-                {TEXTS.CTA_SECTION.titleItalic}
-              </em>
-            </motion.h2>
-            <motion.p variants={fadeUp} className="font-sans text-sm sm:text-base text-white/70 leading-relaxed mb-8 max-w-md">
-              {TEXTS.CTA_SECTION.description}
-            </motion.p>
+            <SectionHeader
+              tag={TEXTS.CTA_SECTION.tag}
+              title={TEXTS.CTA_SECTION.title}
+              titleAccent={TEXTS.CTA_SECTION.titleItalic}
+              subtitle={TEXTS.CTA_SECTION.description}
+              light={true}
+              center={false}
+              className="mb-8"
+            />
             
             <motion.div variants={fadeUp} className="mb-12">
 
@@ -74,7 +71,7 @@ export function GreenCtaSection() {
             {/* Stats compactos */}
             <motion.div
               variants={staggerContainer(0.1)}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-8 border-t border-white/15 w-full"
+              className="hidden sm:grid grid-cols-1 sm:grid-cols-2 gap-6 pt-8 border-t border-white/15 w-full"
             >
               {TEXTS.CTA_SECTION.stats.slice(0, 2).map((s) => (
                 <motion.div key={s.value} variants={fadeUp} className="flex flex-col items-center lg:items-start text-center lg:text-left">

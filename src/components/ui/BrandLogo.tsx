@@ -16,37 +16,8 @@
 import Image from "next/image";
 import { BRAND_LOGO } from "@/lib/brand";
 import { TEXTS } from "@/lib/content";
-
-// ─── Emblem interno (específico da Herboria) ───────────────────────
-// Quando você criar uma nova LP, este SVG fica aqui mas não será
-// utilizado se BRAND_LOGO.type !== "emblem".
-function BotanicalEmblem({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 40 40"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      aria-hidden="true"
-      fill="none"
-    >
-      <circle cx="20" cy="20" r="19" stroke="currentColor" strokeWidth="1.2" />
-      <path
-        d="M20 8C20 8 26.5 14 26.5 20C26.5 26 20 30.5 20 30.5C20 30.5 13.5 26 13.5 20C13.5 14 20 8 20 8Z"
-        fill="currentColor"
-        fillOpacity="0.22"
-        stroke="currentColor"
-        strokeWidth="0.8"
-      />
-      <line x1="20" y1="8.5" x2="20" y2="29.5" stroke="currentColor" strokeWidth="0.7" />
-      {[14, 18, 22].map((y) => (
-        <g key={y}>
-          <path d={`M20 ${y}C18 ${y-2} 15 ${y-2} 14 ${y-1}`} stroke="currentColor" strokeWidth="0.7" strokeLinecap="round" />
-          <path d={`M20 ${y}C22 ${y-2} 25 ${y-2} 26 ${y-1}`} stroke="currentColor" strokeWidth="0.7" strokeLinecap="round" />
-        </g>
-      ))}
-    </svg>
-  );
-}
+import { BotanicalEmblem } from "./Icons";
+import { cn } from "@/lib/utils";
 
 // ─── Props ────────────────────────────────────────────────────────
 interface BrandLogoProps {
@@ -58,6 +29,10 @@ interface BrandLogoProps {
   hideText?: boolean;
   /** Cor do texto (usa currentColor por padrão) */
   light?: boolean;
+  /** Classes customizadas para o texto principal */
+  textClassName?: string;
+  /** Classes customizadas para a tagline */
+  taglineClassName?: string;
 }
 
 // ─── Componente ───────────────────────────────────────────────────
@@ -66,16 +41,18 @@ export function BrandLogo({
   iconClassName = "w-9 h-9",
   hideText = false,
   light = false,
+  textClassName = "",
+  taglineClassName = "",
 }: BrandLogoProps) {
   const textColor = light ? "text-white" : "text-foreground";
   const subColor  = light ? "text-white/60" : "text-muted-foreground";
 
   const textBlock = !hideText && (
     <div className="leading-none text-center md:text-left hidden sm:flex sm:flex-col" aria-hidden="true">
-      <span className={`font-heading text-[17px] font-semibold tracking-[0.18em] uppercase block ${textColor}`}>
+      <span className={cn(`font-heading text-[17px] font-semibold tracking-[0.18em] uppercase block ${textColor}`, textClassName)}>
         {TEXTS.SITE.name}
       </span>
-      <span className={`font-sans text-[9px] tracking-[0.22em] uppercase block -mt-0.5 ${subColor}`}>
+      <span className={cn(`font-sans text-[9px] tracking-[0.22em] uppercase block -mt-0.5 ${subColor}`, taglineClassName)}>
         {TEXTS.SITE.tagline}
       </span>
     </div>
@@ -84,8 +61,8 @@ export function BrandLogo({
   // ── type: "emblem" ─────────────────────────────────────────────
   if (BRAND_LOGO.type === "emblem") {
     return (
-      <div className={`flex items-center gap-2.5 ${className}`}>
-        <BotanicalEmblem className={`${iconClassName} ${light ? "text-white" : "text-primary"} transition-transform duration-300 group-hover:scale-105`} />
+      <div className={cn("flex items-center gap-2.5", className)}>
+        <BotanicalEmblem className={cn(iconClassName, light ? "text-white" : "text-primary", "transition-transform duration-300 group-hover:scale-105")} />
         {textBlock}
       </div>
     );
@@ -94,7 +71,7 @@ export function BrandLogo({
   // ── type: "image" ──────────────────────────────────────────────
   if (BRAND_LOGO.type === "image") {
     return (
-      <div className={`flex items-center gap-3 ${className}`}>
+      <div className={cn("flex items-center gap-3", className)}>
         <Image
           src={BRAND_LOGO.imageSrc}
           alt={TEXTS.SITE.name}
@@ -110,12 +87,12 @@ export function BrandLogo({
 
   // ── type: "text" ───────────────────────────────────────────────
   return (
-    <div className={`flex flex-col ${className}`}>
-      <span className={`font-heading text-2xl font-semibold tracking-[0.18em] uppercase block ${textColor}`}>
+    <div className={cn("flex flex-col", className)}>
+      <span className={cn(`font-heading text-2xl font-semibold tracking-[0.18em] uppercase block ${textColor}`, textClassName)}>
         {TEXTS.SITE.name}
       </span>
       {!hideText && (
-        <span className={`font-sans text-[10px] tracking-[0.22em] uppercase block -mt-0.5 ${subColor}`}>
+        <span className={cn(`font-sans text-[10px] tracking-[0.22em] uppercase block -mt-0.5 ${subColor}`, taglineClassName)}>
           {TEXTS.SITE.tagline}
         </span>
       )}
